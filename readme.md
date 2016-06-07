@@ -13,7 +13,7 @@ If you have any comments or suggestions, feel free to give me a shout [on Twitte
 - [Homebrew Cask](#homebrew-cask)
 - [RVM & Ruby](#rvm-and-ruby)
 - [Sass](#sass)
-- [Sublime Text](#sublime-text)
+- [Sublime Text and Atom](#sublime-text-and-atom)
 - [Vim](#vim)
 - [VirtualBox](#virtualbox)
 - [Vagrant](#vagrant)
@@ -22,7 +22,6 @@ If you have any comments or suggestions, feel free to give me a shout [on Twitte
 - [Preprocessors and Postprocessors](#preprocessors-and-postprocessors)
 - [Yeoman](#yeoman)
 - [ES6](#es6)
-- [Heroku](#heroku)
 - [MongoDB](#mongodb)
 - [Composer](#composer)
 - [Apps](#apps)
@@ -87,7 +86,7 @@ By default, Terminal is using Bash Unix shell. Bash contains the command languag
 
 Install it with the following command:
 
-    $ curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+    $ curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 
 Now you have ZSH installed. [Sign up and follow the videos recorded by Wes Bos](http://commandlinepoweruser.com/) to learn a ton more about ZSH and why it's so powerful.
 
@@ -229,7 +228,7 @@ Install your preprocessor of choice, but I highly recommend using Sass. They all
 
     $ sudo gem install sass
 
-## Sublime Text
+## Sublime Text and Atom
 
 With the terminal, the text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](http://en.wikipedia.org/wiki/Vim_(text_editor)) user, a lot of people are going to tell you that [Sublime Text](http://www.sublimetext.com/) is currently the best one out there.
 
@@ -237,9 +236,7 @@ With the terminal, the text editor is a developer's most important tool. Everyon
 
 I prefer using the [beta version of Sublime Text 3](https://sublimetext.com/3) which is usually just as stable as version 2.
 
-To install beta manually, [download](http://www.sublimetext.com/3) it, open the **.dmg** file, drag-and-drop in the **Applications** folder, you know the drill now. Launch the application.
-
-**Note**: At this point I'm going to create a shortcut on the OS X Dock for both for Sublime Text and iTerm. To do so, right-click on the running application and select **Options > Keep in Dock**.
+To install beta manually, [download](http://www.sublimetext.com/3) it, open the **.dmg** file, drag-and-drop in the **Applications** folder, you know the drill now. Launch the application. In the OS X dock, right-click on the running application and select **Options > Keep in Dock**.
 
 Sublime Text is not free, but I think it has an unlimited "evaluation period". Anyhow, we're going to be using it so much that even the seemingly expensive $70 price tag is worth every penny. If you can afford it, I suggest you [support](http://www.sublimetext.com/buy) this awesome tool. :)
 
@@ -274,6 +271,12 @@ Now I can open a file with `$ subl myfile.py` or start a new project in the curr
 
 Sublime Text is very extensible. For now we'll leave it like that, we already have a solid installation.
 
+### Atom
+
+If you like Sublime Text but can't afford or don't want to pay for it, [Atom](https://atom.io/) is an open-source version of Sublime Text that has a healthy community and regular updates.
+
+The main problem for Atom as of summer 2016 is that large files and projects slow down noticeably Atom's performance. 
+
 ## Vim
 
 Although Sublime Text will be our main editor, it is a good idea to learn some very basic usage of [Vim](http://www.vim.org/). It is a very popular text editor inside the terminal, and is usually pre-installed on any Unix system.
@@ -288,7 +291,7 @@ First, install [pathogen.vim](https://github.com/tpope/vim-pathogen) by running:
 
     $ mkdir -p ~/.vim/autoload ~/.vim/bundle
     $ curl -Sso ~/.vim/autoload/pathogen.vim \
-        https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+        https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 Then create a file `~/.vimrc` (you can use `$ subl ~/.vimrc`), and paste in the following:
 
@@ -327,7 +330,7 @@ The brilliance of vagrant is its ability to be so portable. When you have a proj
 
     $ vagrant up
 
-My favorite box to use for new projects is called [Scotch Box](https://box.scotch.io/). It is fully-featured and contains everything I need built in to get started with many projects using PHP, JS or Ruby.
+My favorite box to use for new projects is called [Scotch Box](https://box.scotch.io/). It is fully-featured and contains everything I need built in to get started with many projects using PHP, JS or Ruby. For a WordPress environment, [Roots](https://roots.io/) has [Trellis](https://roots.io/trellis/) which includes everything you need for a powerful VM.
 
 ## Git
 
@@ -341,10 +344,10 @@ When done, to test that it installed fine you can run:
 
 And `$ which git` should output `/usr/local/bin/git`.
 
-Let's set up some basic configuration. Download the [.gitconfig](/nicolahery/mac-dev-setup/blob/master/.gitconfig) file to your home directory:
+Let's set up some basic configuration. Download the [.gitconfig](https://raw.githubusercontent.com/nicolashery/mac-dev-setup/master/.gitconfig) file to your home directory:
 
     $ cd ~
-    $ curl -O https://raw.github.com/nicolashery/mac-dev-setup/master/.gitconfig
+    $ curl -O https://raw.githubusercontent.com/nicolashery/mac-dev-setup/master/.gitconfig
 
 It will add some color to the `status`, `branch`, and `diff` Git commands, as well as a couple aliases. Feel free to take a look at the contents of the file, and add to it to your liking.
 
@@ -419,76 +422,33 @@ To uninstall a package:
 
 ### Preprocessors and Postprocessors
 
-Previously, I had you install Sass. In case you're not a fan of Sass or prefer another type of processor, here are
+Previously, I had you install Sass but there are other popular CSS tools.
 
-In case you like Less:
+Less is the most popular preprocessor alternative to Sass:
 
     $ npm install -g less
 
-CSS Next is the future wave of CSS processing, allowing you to write cutting edge styles from tomorrow's language:
+CSS Next is the future wave of CSS postprocessing, allowing you to write cutting edge styles from tomorrow's language:
 
-    $ npm install cssnext
+    $ npm install -g cssnext
 
 ### Yeoman
 
 If you intend to use a modern Javascript MVC framework and need a quick way to scaffold out a base framework, [Yeoman](http://yeoman.io/) was built specifically for this purpose. It contains generators for all the most popular frameworks and tools.
 
-    $npm install yo
+    $ npm install yo
 
 ### ES6
 
 The time has come for you to start learning the newest version of Javascript, ECMAScript 6 (ES6). Where we needed jQuery previously, it is not the golden standard it once was. Browser quirks are decreasing because web standards are regularly implemented and iterated. Thus, the golden age of Javascript is upon us.
 
-As of June 2015, ES6 is ratified as the newest JS version. There is no command needed to install it, but until browsers catch up implementing the newest features, it is recommended to use a transpiler to convert your ES6 back to ES5, which is universally supported in all modern browsers.
+As of June 2015, ES6 is ratified as the newest JS version. Until browsers catch up implementing the newest features, it is recommended to use a transpiler to convert your ES6 back to ES5, which is universally supported in all modern browsers.
 
 The most popular transpiler is Babel(https://babeljs.io/).
 
     $ npm install -g babel
 
 Pairing this with a build system will give you the ability to write today's scripting language without worrying about incompatibilities. Check out [Babel's tools](https://babeljs.io/docs/setup/) to build your custom stack.
-
-## Heroku
-
-[Heroku](http://www.heroku.com/), if you're not already familiar with it, is a [Platform-as-a-Service](http://en.wikipedia.org/wiki/Platform_as_a_service) (PaaS) that makes it really easy to deploy your apps online. There are other similar solutions out there, but Heroku was among the first and is currently the most popular. Not only does it make a developer's life easier, but I find that having Heroku deployment in mind when building an app forces you to follow modern app development [best practices](http://www.12factor.net/).
-
-### Install
-
-Assuming that you have an account (sign up if you don't), let's install the [Heroku Client](https://devcenter.heroku.com/articles/using-the-cli) for the command-line. Heroku offers a Mac OS X installer, the [Heroku Toolbelt](https://toolbelt.heroku.com/), that includes the client. But for these kind of tools, I prefer using Homebrew. It allows us to keep better track of what we have installed. Luckily for us, Homebrew includes a `heroku-toolbelt` formula:
-
-    $ brew install heroku-toolbelt
-
-The formula might not have the latest version of the Heroku Client, which is updated pretty often. Let's update it now:
-
-    $ heroku update
-
-Don't be afraid to run `heroku update` every now and then to always have the most recent version.
-
-### Usage
-
-Login to your Heroku account using your email and password:
-
-    $ heroku login
-
-If this is a new account, and since you don't already have a public **SSH key** in your `~/.ssh` directory, it will offer to create one for you. Say yes! It will also upload the key to your Heroku account, which will allow you to deploy apps from this computer.
-
-If it didn't offer create the SSH key for you (i.e. your Heroku account already has SSH keys associated with it), you can do so manually by running:
-
-     $ mkdir ~/.ssh
-     $ ssh-keygen -t rsa
-
-Keep the default file name and skip the passphrase by just hitting Enter both times. Then, add the key to your Heroku account:
-
-    $ heroku keys:add
-
-Once the key business is done, you're ready to deploy apps! Heroku has a great [Getting Started](https://devcenter.heroku.com/articles/python) guide, so I'll let you refer to that (the one linked here is for Python, but there is one for every popular language). Heroku uses Git to push code for deployment, so make sure your app is under Git version control. A quick cheat sheet (if you've used Heroku before):
-
-    $ cd myapp/
-    $ heroku create myapp
-    $ git push heroku master
-    $ heroku ps
-    $ heroku logs -t
-
-The [Heroku Dev Center](https://devcenter.heroku.com/) is full of great resources, so be sure to check it out!
 
 ## MongoDB
 
@@ -532,7 +492,7 @@ Here is a quick list of some apps I use, and that you might find useful as well:
 
 - [Mou](http://markedapp.com/): As a developer, most of the stuff you write ends up being in [Markdown](http://daringfireball.net/projects/markdown/). In fact, this `README.md` file (possibly the most important file of a GitHub repo) is indeed in Markdown, written in Sublime Text, and I use Marked to preview the results everytime I save. **(FREE)**
 - [Alfred](http://www.alfredapp.com/): If you find Yosemite's Spotlight to be limited in functionality, try Alfred. It has a healthy community and lots of plugins.
-- [Evernote](https://evernote.com/): If I don't write something down, I'll forget it. As a developer, you learn so many new things every day, and technology keeps changing, it would be insane to want to keep it all in your head. So take notes, sync them to the cloud, and have them on all your devices. To be honest, I switched to [Simplenote](http://simplenote.com/) because I only take text notes, and I got tired of Evernote putting extra spaces between paragraphs when I copy & pasted into other applications. Simplenote is so much better for text notes (and it supports Markdown!). **(Both are free)**
+- [Evernote](https://evernote.com/): If I don't write something down, I'll forget it. As a developer, you learn so many new things every day, and technology keeps changing, it would be insane to want to keep it all in your head. So take notes, sync them to the cloud, and have them on all your devices. Another alternative is [Simplenote](http://simplenote.com/) because I only take text notes, and Evernote puts extra spaces between paragraphs when I copy & paste into other applications. Simplenote is great for text notes (and it supports Markdown!). **(Both are free)**
 - [SoundCleod](https://github.com/salomvary/soundcleod): Standalone app to play Soundcloud audio/music. Because why not?
 - [Maximum Awesome](https://github.com/square/maximum-awesome): I originally intended to write my own build script for a lot of this, but Maximum Awesome already does a fantastic job installing iTerm2, Tmux, MacVim and a plethora of other great features!
 

@@ -98,11 +98,7 @@ Package managers make it so much easier to install and update applications (for 
 
 In terminal paste the following line (without `$`), hit **Enter**, and follow the steps on the screen:
 
-    $ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-
-One thing we need to do is tell the system to use programs installed by Hombrew (in `/usr/local/bin`) rather than the OS default if it exists. We do this by adding `/usr/local/bin` to your `$PATH` environment variable:
-
-    $ echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
+    $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 Open an new terminal tab with **Cmd+T** (you should also close the old one), then run the following command to make sure everything works:
 
@@ -148,7 +144,7 @@ To see what you have installed (with their version numbers):
 
 Homebrew Cask extends Homebrew to let you install OS X applications and large binaries alike. Use it to install browsers and editors!
 
-    brew install caskroom/cask/brew-cask
+    brew tap caskroom/cask
 
 ### [Google Chrome](http://google.com/chrome)
 
@@ -275,7 +271,7 @@ Sublime Text is very extensible. For now we'll leave it like that, we already ha
 
 If you like Sublime Text but can't afford or don't want to pay for it, [Atom](https://atom.io/) is an open-source version of Sublime Text that has a healthy community and regular updates.
 
-The main problem for Atom as of summer 2016 is that large files and projects slow down noticeably Atom's performance. 
+The main problem for Atom as of autumn 2016 is that large files and projects slow down noticeably Atom's performance. 
 
 ## Vim
 
@@ -419,18 +415,6 @@ To upgrade all or a particular package:
 To uninstall a package:
 
     $ npm uninstall <package>
-
-### Preprocessors and Postprocessors
-
-Previously, I had you install Sass but there are other popular CSS tools.
-
-Less is the most popular preprocessor alternative to Sass:
-
-    $ npm install -g less
-
-CSS Next is the future wave of CSS postprocessing, allowing you to write cutting edge styles from tomorrow's language:
-
-    $ npm install -g cssnext
 
 ### Yeoman
 

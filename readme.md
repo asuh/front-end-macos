@@ -428,9 +428,11 @@ The time has come for you to start learning the newest version of Javascript, EC
 
 As of June 2015, ES6 is ratified as the newest JS version. Until browsers catch up implementing the newest features, it is recommended to use a transpiler to convert your ES6 back to ES5, which is universally supported in all modern browsers.
 
-The most popular transpiler is Babel(https://babeljs.io/).
+The most popular transpiler is [Babel](https://babeljs.io/).
 
-    $ npm install -g babel
+    $ npm install --save-dev babel-cli
+    
+Since it's generally a bad idea to run Babel globally you may want to uninstall the global copy by running npm uninstall --global babel-cli.
 
 Pairing this with a build system will give you the ability to write today's scripting language without worrying about incompatibilities. Check out [Babel's tools](https://babeljs.io/docs/setup/) to build your custom stack.
 

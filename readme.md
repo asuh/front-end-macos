@@ -1,11 +1,12 @@
 # Front-End Development Setup on a Mac
 
-This document assumes you're running a fresh copy of **OS X Yosemite or El Capitan**.
+This document assumes you're running a fresh copy of **macOS "formerly known as OS X"**.
 
 If you have any comments or suggestions, feel free to give me a shout [on Twitter](https://twitter.com/asuh)!
 
-- [OS X Prepartion](#system-update-and-disk-encryption)
+- [macOS Prepartion](#system-update-and-disk-encryption)
 - [Reset Modifier Keys](#reset-modifier-keys-optional)
+- [Terminal](#terminal-optional)
 - [Projects Directory](#projects-directory)
 - [Xcode Command Line Tools](#xcode-command-line-tools)
 - [ZSH](#zsh-optional)
@@ -28,21 +29,29 @@ If you have any comments or suggestions, feel free to give me a shout [on Twitte
 
 ## System update and Disk Encryption
 
+### Prerequisite
+
+If you don't have a brand new Mac laptop or desktop with a freshly installed operating system, you can [reinstall macOS](https://support.apple.com/en-gb/HT204904). This isn't vital but highly recommended to have a system that starts from scratch.
+
+### First Steps
+
 Step One - Update the system!
 **Apple Icon > App Store > Updates**
 
 Step Two - Turn on FileVault
 **Apple Icon > System Preferences > Privacy & Security > FileVault**
 
-Click on the lock to allow you to turn on and enable FileVault. On a brand new machine or OS X installation, it should take around an hour to get this done.
+Click on the lock to allow you to turn on and enable FileVault. On a brand new machine or macOS installation, it should take around an hour to get this done.
+
+Alternatively, you can use a third-party encryption software like [Veracrypt](https://veracrypt.codeplex.com/), which is open-source and well regarded in the security community.
 
 Why do you want [full-disk encryption](https://en.wikipedia.org/wiki/Disk_encryption)? Theft.
 
 You're most likely using a portable laptop of some kind. If you lose it, the laptop gets stolen or someone tries to hack into it, your personal data is at risk. Using full-disk encryption is an extra layer of security to keep your mind at ease in case of potential intrusion.
 
 Two main caveats:
-- Make sure you do not forget your FileVault password. iCloud can also be used as a tool to access the system instead of a password. Losing this password means you cannot log in and everything on your computer is 100% inaccessible.
-- If OS X gets corrupted and you need to download files from the drive after accessing the drive from an external case, it's not possible. Make sure you're both backing up using [Time Machine](https://support.apple.com/en-us/HT201250) and a cloud backup provider like [iDrive](https://www.idrive.com/) or [Crashplan](https://www.code42.com/crashplan/)
+- Make sure you do not forget your FileVault password. iCloud is an option to store the Filevault password and this means that Apple Support will be able to assist you with recovering data. Losing this password means you cannot log in and everything on your computer is 100% inaccessible.
+- If macOS gets corrupted and you need to download files from the drive after accessing the drive from an external case, it's not possible. Make sure you're both backing up using [Time Machine](https://support.apple.com/en-us/HT201250) and a cloud backup provider like [iDrive](https://www.idrive.com/) or [Crashplan](https://www.code42.com/crashplan/)
 
 ## Reset Modifier Keys (optional)
 
@@ -51,6 +60,16 @@ Replace your Control Key with the Caps lock key. Caps lock is useless. It's a hu
 * Caps Lock = Control
 * Control = No Action
 ![Reset Modifier Keys](http://i.imgur.com/qEfywWM.png)
+
+## Terminal (optional)
+
+Front-end development has increasingly moved towards an open-source, command-line interface (CLI) dependent workflow. Whether we access modules, packages or simply useful commands, setting up Terminal to your liking is a good idea to start.
+
+Throughout this document, you will encounter examples which look like this and contain one more of the arguments listed:
+
+    $ [command] -flag --flag directory file.extension
+    
+Anytime you see this, it is referring to your CLI of choice, whether it's the built-in Terminal.app or a third-party application like [iTerm2](https://iterm2.com/).
 
 ## Projects Directory
 
@@ -144,7 +163,7 @@ To see what you have installed (with their version numbers):
 
 Homebrew Cask extends Homebrew to let you install OS X applications and large binaries alike. Use it to install browsers and editors!
 
-    brew tap caskroom/cask
+    $ brew tap caskroom/cask
 
 ### [Google Chrome](http://google.com/chrome)
 
@@ -162,17 +181,18 @@ Brew Cask is awesome because now that you understand what it does, you can insta
 
 Ruby does come pre-installed on Mac, but you probably shouldn't be tinkering around with that version. It's best to install a ruby version manager to take care of anything that one might screw up messing around with your system's version of Ruby.
 
-[RVM](https://rvm.io) stands for Ruby Version Manager and is a recommended program to use to install and manage different Ruby versions.
+[RVM](https://rvm.io) stands for Ruby Version Manager and is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems.
 
 (Optional) If you plan on installing Rails, I first recommend disabling documentation. RVM installs documentation for every gem that Rails depends on and will slow down installation.
 
     echo "gem: --no-document" >> ~/.gemrc
 
-Installing RVM, Ruby and Rails can be done with just one command! If you don't plan to use Rails, you can replace `--rails` with `--ruby` in the command below:
+Installing RVM, Ruby and Rails can be done with just one command! If you don't plan to use Rails, you can replace `--rails` with `--ruby` in the commands below:
 
-    $ curl -L https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
+    $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+    $ \curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
 
-For more installation options, see the [RVM documentation](https://github.com/wayneeseguin/rvm#installation).
+For more installation options, see the [RVM documentation](https://github.com/rvm/rvm#installation).
 
 In rare cases that you need to reopen multiple shell windows, you need to run the following command in all your open shell windows:
 
@@ -182,7 +202,7 @@ Replace `{username}` with your computer's user name which can be found right in 
 
 After it's done, quit and relaunch Terminal, then run this command:
 
-    $ rvm | head -1
+    $ rvm | head -n 1
 
 If you get rvm is a function, that means RVM was successfully installed. If not, go to the Troubleshooting section.
 
@@ -205,7 +225,7 @@ You should get `Rails 4.2.5.2` or higher.
 If you previously installed ZSH, Terminal might throw the following error at the top of any new Terminal session:
 
     Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
-    https://github.com/wayneeseguin/rvm/issues/3212
+    https://github.com/rvm/rvm/issues/3212
 
 To [resolve this issue](https://stackoverflow.com/questions/27784961/received-warning-message-path-set-to-rvm-after-updating-ruby-version-using-rvm), open the .zshrc file and change the follow path from:
 
@@ -220,7 +240,7 @@ If your export `PATH` has no quotations, it will still work correctly just by en
 
 ## Sass
 
-Install your preprocessor of choice, but I highly recommend using Sass. They all do the same thing but Sass has the most momentum behind it right now.
+Install your preprocessor of choice, but I highly recommend using Sass. They all do the same thing but Sass is the most popular and widely supported.
 
     $ sudo gem install sass
 
@@ -271,7 +291,7 @@ Sublime Text is very extensible. For now we'll leave it like that, we already ha
 
 If you like Sublime Text but can't afford or don't want to pay for it, [Atom](https://atom.io/) is an open-source version of Sublime Text that has a healthy community and regular updates.
 
-The main problem for Atom as of autumn 2016 is that large files and projects slow down noticeably Atom's performance. 
+The main problem for Atom as of winter 2017 is that large files and projects slow down noticeably Atom's performance. 
 
 ## Vim
 
@@ -486,9 +506,9 @@ Here is a quick list of some apps I use, and that you might find useful as well:
 - look over rbenv https://github.com/sstephenson/rbenv
 - enable blackboxing [ manage framework blackboxing on chrome]
 - Allow apps downloaded from anywhere system preferences
-- brew install zsh
 
 ## Credits
 
 - [How to Install Xcode, Homebrew, Git, RVM, Ruby & Rails on Mac OS X](http://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/)
 - [Web development environment setup in OSX 2015](https://www.youtube.com/watch?v=yZ9TD9bmh-M)
+- [macOS Development Environment](https://assortment.io/posts/macos-development-environment)

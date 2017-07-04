@@ -1,12 +1,12 @@
 # Front-End Development Setup on a Mac
 
-This document assumes you're running a fresh copy of **macOS "formerly known as OS X"**.
+This document assumes you're running a fresh and updated copy of **macOS "formerly known as OS X"**.
 
 If you have any comments or suggestions, feel free to give me a shout [on Twitter](https://twitter.com/asuh)!
 
-- [macOS Prepartion](#system-update-and-disk-encryption)
-- [Reset Modifier Keys](#reset-modifier-keys-optional)
-- [Terminal](#terminal-optional)
+- [Terminal](#terminal)
+- [System update and Disk Encryption](#system-update-and-disk-encryption)
+- [System tweaks](#system-tweaks)
 - [Projects Directory](#projects-directory)
 - [Xcode Command Line Tools](#xcode-command-line-tools)
 - [ZSH](#zsh-optional)
@@ -27,21 +27,33 @@ If you have any comments or suggestions, feel free to give me a shout [on Twitte
 - [Composer](#composer)
 - [Apps](#apps)
 
+## Terminal
+
+Throughout this document, you will encounter examples like this that contain one or more of the arguments listed:
+
+    $ sudo command -flag --flag directory file.extention
+
+Front-end development has increasingly moved towards an open-source, command-line interface (CLI) dependent workflow. Whether we access modules, packages or simply useful commands, setting up Terminal to your liking is a good idea to start.
+    
+Anytime you see this, it is referring to your CLI of choice, whether it's the built-in Terminal.app or a third-party application like [iTerm2](https://iterm2.com/).
+
 ## System update and Disk Encryption
 
 ### Prerequisite
 
-If you don't have a brand new Mac laptop or desktop with a freshly installed operating system, you can [reinstall macOS](https://support.apple.com/en-gb/HT204904). This isn't vital but highly recommended to have a system that starts from scratch.
+If you don't have a new Mac laptop or desktop with a freshly installed operating system, you can [reinstall macOS](https://support.apple.com/en-gb/HT204904). This is highly recommended but not required.
 
-### First Steps
+### Update macOS
 
-Step One - Update the system!
 **Apple Icon > App Store > Updates**
 
-Step Two - Turn on FileVault
+### Enable FileVault Encryption
+
+Before installing anything, let's enable disk encryption. This is the best way to protect your data.
+
 **Apple Icon > System Preferences > Privacy & Security > FileVault**
 
-Click on the lock to allow you to turn on and enable FileVault. On a brand new machine or macOS installation, it should take around an hour to get this done.
+Click on the lock to allow you to turn on and enable FileVault. On a brand new machine or macOS installation, it should take around an hour or less to get this done depending on the size of your drive.
 
 Alternatively, you can use a third-party encryption software like [Veracrypt](https://veracrypt.codeplex.com/), which is open-source and well regarded in the security community.
 
@@ -53,36 +65,52 @@ Two main caveats:
 - Make sure you do not forget your FileVault password. iCloud is an option to store the Filevault password and this means that Apple Support will be able to assist you with recovering data. Losing this password means you cannot log in and everything on your computer is 100% inaccessible.
 - If macOS gets corrupted and you need to download files from the drive after accessing the drive from an external case, it's not possible. Make sure you're both backing up using [Time Machine](https://support.apple.com/en-us/HT201250) and a cloud backup provider like [iDrive](https://www.idrive.com/) or [Crashplan](https://www.code42.com/crashplan/)
 
-## Reset Modifier Keys (optional)
+### Enable Firewall
 
-Replace your Control Key with the Caps lock key. Caps lock is useless. It's a huge icon, easy for your pinky to hit and it'll make life easier when working with vim. **System Preferences > Search for Reset Modifier Keys**
+This is for online protection when you're not in your home network or not behind a router.
 
-* Caps Lock = Control
-* Control = No Action
-![Reset Modifier Keys](http://i.imgur.com/qEfywWM.png)
+    $ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 
-## Terminal (optional)
+## System Tweaks
 
-Front-end development has increasingly moved towards an open-source, command-line interface (CLI) dependent workflow. Whether we access modules, packages or simply useful commands, setting up Terminal to your liking is a good idea to start.
+Apple's default system settings are limiting and don't show a lot of information. Let's change the settings for better usability around the system.
 
-Throughout this document, you will encounter examples which look like this and contain one more of the arguments listed:
+### Unhide the Library folder
 
-    $ [command] -flag --flag directory file.extension
+    $ chflags nohidden ~/Library
     
-Anytime you see this, it is referring to your CLI of choice, whether it's the built-in Terminal.app or a third-party application like [iTerm2](https://iterm2.com/).
+Alternatively, open Finder, press `⇧⌘H`, `⌘2`, `⌘J` and check “Show Library Folder”.
+
+### Show Path Bar and Status Bar in Finder
+
+    $ defaults write com.apple.finder ShowPathbar -bool true
+    $ defaults write com.apple.finder ShowStatusBar -bool true
+
+### Show Full Path in Finder Title Bar
+
+    $ defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+### Prevent Time Machine from Prompting to Use New Hard Drives as Backup Volume
+
+I don’t use Time Machine. It is better than nothing but not necessary. I don’t need these annoying windows popping up whenever I’m plugging in a new external harddrive.
+
+    $ sudo defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+### Show All File Extensions
+
+    $ defaults write -g AppleShowAllExtensions -bool true
+    
+### Disable Creation of DS_Store Files on Network Volumes and USB Drives
+
+    $ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+    $ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 ## Projects Directory
 
-Create a project directory somewhere on your machine. I like to use `~/Sites/project-name`. I prefer my Sites folder to exist along side the rest of my user profile folders.
+Create a project directory somewhere on your machine. I like to use `~/Sites/project-name`. I prefer my Sites folder to exist with the rest of my user profile folders.
 
     $ mkdir -p ~/Sites
-
-(optional) I also split them into work/personal/temp. If you fire up terminal **(Command + Spacebar -> Type: Terminal -> Enter)** you will be able to run this command to automatically create those directories for you:
-
-	$ mkdir -p ~/Sites/{personal,tmp,work}
-
-Other documents I may have, or things not yet under version control, I like to put in `~/Dropbox` (if you have Dropbox installed), or `~/Documents`.
-
+    
 ## Xcode Command Line Tools
 
 An important dependency before Homebrew can work is the **Command Line Tools** for **Xcode**. These include compilers that will allow you to build things from source.
@@ -131,18 +159,6 @@ To install a package (or **Formula** in Homebrew vocabulary) simply type:
 
 Replace `<forumla>` with the name of the formula you want to install.
 
-To update Homebrew's directory of formulae, run:
-
-    $ brew update
-
-**Note**: I've seen `brew update` fail sometimes because of a bug. If that ever happens, run the following (when you [have Git installed](#git)):
-
-```bash
-$ cd /usr/local
-$ git fetch origin
-$ git reset --hard origin/master
-```
-
 To see if any of your packages need to be updated:
 
     $ brew outdated
@@ -175,7 +191,7 @@ Let's test this by installing Google Chrome.
 
 Brew Cask is awesome because now that you understand what it does, you can install all your favorite apps in one command! Here's a list of my favorite apps, including Google Chrome, that I need for development on a regular basis.
 
-    $ brew cask install google-chrome firefox opera github sourcetree imageoptim clamxav vlc filezilla transmission skype virtualbox appcleaner vagrant
+    $ brew cask install google-chrome firefox opera brave github sourcetree imageoptim imagealpha google-nik-collection vlc filezilla transmission skype virtualbox appcleaner vagrant tunnelblick slack sublime-text
 
 ## RVM and Ruby
 
@@ -246,13 +262,9 @@ Install your preprocessor of choice, but I highly recommend using Sass. They all
 
 ## Sublime Text and Atom
 
-With the terminal, the text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](http://en.wikipedia.org/wiki/Vim_(text_editor)) user, a lot of people are going to tell you that [Sublime Text](http://www.sublimetext.com/) is currently the best one out there.
+With Terminal, the text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](http://en.wikipedia.org/wiki/Vim_(text_editor)) user, a lot of people are going to tell you that [Sublime Text](http://www.sublimetext.com/) is currently the best one out there.
 
     $ brew cask install sublime-text
-
-I prefer using the [beta version of Sublime Text 3](https://sublimetext.com/3) which is usually just as stable as version 2.
-
-To install beta manually, [download](http://www.sublimetext.com/3) it, open the **.dmg** file, drag-and-drop in the **Applications** folder, you know the drill now. Launch the application. In the OS X dock, right-click on the running application and select **Options > Keep in Dock**.
 
 Sublime Text is not free, but I think it has an unlimited "evaluation period". Anyhow, we're going to be using it so much that even the seemingly expensive $70 price tag is worth every penny. If you can afford it, I suggest you [support](http://www.sublimetext.com/buy) this awesome tool. :)
 
@@ -277,13 +289,7 @@ Let's configure our editor a little. Go to **Sublime Text > Preferences > Settin
 
 Feel free to tweak these to your taste. When done, save the file and close it.
 
-Let's create a shortcut so we can launch Sublime Text from the command-line:
-
-    $ cd ~
-    $ mkdir bin
-    $ ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl
-
-Now I can open a file with `$ subl myfile.py` or start a new project in the current directory with `$ subl .`. Pretty cool.
+I can also open a file with `$ subl myfile.ext` or start a new project in the current directory with `$ subl .`. Pretty cool.
 
 Sublime Text is very extensible. For now we'll leave it like that, we already have a solid installation.
 
@@ -291,7 +297,7 @@ Sublime Text is very extensible. For now we'll leave it like that, we already ha
 
 If you like Sublime Text but can't afford or don't want to pay for it, [Atom](https://atom.io/) is an open-source version of Sublime Text that has a healthy community and regular updates.
 
-The main problem for Atom as of winter 2017 is that large files and projects slow down noticeably Atom's performance. 
+The main problem for Atom as of summer 2017 is that large files and projects slow down noticeably Atom's performance. 
 
 ## Vim
 
@@ -346,7 +352,7 @@ The brilliance of vagrant is its ability to be so portable. When you have a proj
 
     $ vagrant up
 
-My favorite box to use for new projects is called [Scotch Box](https://box.scotch.io/). It is fully-featured and contains everything I need built in to get started with many projects using PHP, JS or Ruby. For a WordPress environment, [Roots](https://roots.io/) has [Trellis](https://roots.io/trellis/) which includes everything you need for a powerful VM.
+A great box to use for new projects is called [Scotch Box](https://box.scotch.io/). It is fully-featured and contains everything I need built in to get started with many projects using PHP, JS or Ruby. For a WordPress environment, [Roots](https://roots.io/) has [Trellis](https://roots.io/trellis/) which includes everything you need for a powerful VM.
 
 ## Git
 
@@ -369,14 +375,10 @@ It will add some color to the `status`, `branch`, and `diff` Git commands, as we
 
 Next, we'll define your Git user (should be the same name and email you use for [GitHub](https://github.com/) and [Heroku](http://www.heroku.com/)):
 
-    $ git config --global user.name "Your Name Here"
+    $ git config --global user.name "FirstName LastName"
     $ git config --global user.email "your_email@youremail.com"
 
 They will get added to your `.gitconfig` file.
-
-To push code to your GitHub repositories, we're going to use the recommended HTTPS method (versus SSH). So you don't have to type your username and password everytime, let's enable Git password caching as described [here](https://help.github.com/articles/set-up-git):
-
-    $ git config --global credential.helper osxkeychain
 
 **Note**: On a Mac, it is important to remember to add `.DS_Store` (a hidden OS X system file that's put in folders) to your `.gitignore` files. You can take a look at this repository's [.gitignore](/nicolahery/mac-dev-setup/blob/master/.gitignore) file for inspiration.
 
@@ -384,7 +386,6 @@ To push code to your GitHub repositories, we're going to use the recommended HTT
 
 Install [Node.js](http://nodejs.org/) with Homebrew:
 
-    $ brew update
     $ brew install node
 
 The formula also installs the [npm](https://npmjs.org/) package manager. However, as suggested by the Homebrew output, we need to add `/usr/local/share/npm/bin` to our path so that npm-installed modules with executables will have them picked up.
@@ -401,9 +402,8 @@ We also need to tell npm where to find the Xcode Command Line Tools, by running:
 
     $ sudo xcode-select -switch /usr/bin
 
-Node modules are installed locally in the `node_modules` folder of each project by default, but there are at least four that are worth installing globally. Those are [CoffeeScript](http://coffeescript.org/), [Grunt](http://gruntjs.com/), [Gulp](http://gulpjs.com/), and [Bower](http://bower.io):
+Node modules are installed locally in the `node_modules` folder of each project by default, but there are at least two or three that are worth installing globally. Those are [Grunt](http://gruntjs.com/) or [Gulp](http://gulpjs.com/), and [Bower](http://bower.io):
 
-    $ npm install -g coffee-script
     $ npm install -g grunt-cli
     $ npm install --global gulp
     $ npm install -g bower
@@ -464,7 +464,6 @@ Pairing this with a build system will give you the ability to write today's scri
 
 Installing it is very easy through Homebrew:
 
-    $ brew update
     $ brew install mongo
 
 ### Usage
@@ -512,3 +511,4 @@ Here is a quick list of some apps I use, and that you might find useful as well:
 - [How to Install Xcode, Homebrew, Git, RVM, Ruby & Rails on Mac OS X](http://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/)
 - [Web development environment setup in OSX 2015](https://www.youtube.com/watch?v=yZ9TD9bmh-M)
 - [macOS Development Environment](https://assortment.io/posts/macos-development-environment)
+- [Setting Up A New Mac](https://www.davidculley.com/setting-up-a-new-mac/)

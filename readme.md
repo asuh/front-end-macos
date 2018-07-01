@@ -12,23 +12,25 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [ZSH](#zsh-optional)
 - [Homebrew](#homebrew)
 - [Homebrew Cask](#homebrew-cask)
+- [Privacy](#privacy)
 - [RVM & Ruby](#rvm-and-ruby)
 - [Git](#git)
 - [Node.js](#nodejs)
 - [ES6](#es6)
 - [Sass](#sass)
+- [Composer](#composer)
 - [Sublime Text, Atom, and VSCode](#sublime-text-atom-and-vscode)
 - [Vim](#vim)
 - [VirtualBox](#virtualbox)
 - [Vagrant](#vagrant)
-- [MongoDB](#mongodb)
-- [Composer](#composer)
 
 ## Command Line Shell
 
 Throughout this document, you will encounter examples like this that contain one or more of the arguments listed:
 
-    sudo command -flag --flag directory file.extention
+```bash
+sudo command -flag --flag directory file.extention # Comments are behind pound signs
+```
 
 Front-end development has increasingly moved towards an open-source, command-line interface (CLI) dependent workflow. Whether we access modules, packages or simply useful commands, setting up a command-line shell to your liking is a good idea to start.
     
@@ -100,7 +102,10 @@ I don’t use Time Machine. It is better than nothing but not necessary. I don�
 
 If you don't already have one, create a projects directory somewhere on your machine. I like to use `~/Sites/project-name`. I prefer my Sites folder to exist with the rest of my user profile folders.
 
-    mkdir -p ~/Sites
+```bash
+cd / # Go to home directory
+mkdir -p ~/Sites
+```
 
 Depending on the type of projects you work on, this might not be necessary or preferable.
 
@@ -138,7 +143,7 @@ Package managers make it so much easier to install and update applications (for 
 
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-Open an new terminal tab with **Cmd+T** (you should also close the old one), then run the following command to make sure everything works:
+Run the following command to make sure everything works:
 
     brew doctor
 
@@ -150,25 +155,17 @@ To install a package (or **Formula** in Homebrew vocabulary) simply type:
 
 Replace `<forumla>` with the name of the formula you want to install.
 
-To see if any of your packages need to be updated:
+Helpful commands:
 
-    brew outdated
-
-To update a package:
-
-    brew upgrade <formula>
-
-Homebrew keeps older versions of packages installed, in case you want to roll back. That rarely is necessary, so you can do some cleanup to get rid of those old versions:
-
-    brew cleanup
-
-To see what you have installed (with their version numbers):
-
-    brew list --versions
+```bash
+brew outdated # check for outdated packages
+brew upgrade <formula> # upgrade package to latest version
+brew list --versions # check installed packages and versions
+```
 
 ## Homebrew Cask
 
-Homebrew Cask extends Homebrew to let you install OS X applications and large binaries alike. Use it to install browsers and editors!
+Homebrew Cask extends Homebrew to let you install applications and large binaries. Use it to install browsers and editors!
 
     brew tap caskroom/cask
 
@@ -184,9 +181,17 @@ Let's test this by installing Firefox.
 
 Brew Cask is awesome because now that you understand what it does, you can install all your favorite apps in one command! Here's a list of my favorite apps, including Google Chrome, that I need for development on a regular basis.
 
-    brew cask install google-chrome google-chrome-canary chromium firefox firefox-developer-edition opera brave torbrowser slack sublime-text-dev visual-studio-code atom github sourcetree imageoptim imagealpha google-nik-collection vlc filezilla transmission skype virtualbox authy appcleaner vagrant tunnelblick slack sublime-text
+    brew cask install google-chrome google-chrome-canary chromium firefox firefox-developer-edition opera brave torbrowser slack sublime-text-dev visual-studio-code atom sourcetree imageoptim imagealpha google-nik-collection vlc filezilla transmission skype virtualbox authy appcleaner vagrant tunnelblick slack
 
 Note: Google Chrome contains Adobe Reader, Flash and Java by default. Running standalone versions of each is not recommended because they are a security risk without regular maintenance and updates.
+
+## Privacy
+
+I think now is the time to briefly let you know that macOS communicates with remove Apple services by default. Apple collects data on how you use the operating system through a process called [Differential Privacy](https://www.wired.com/2016/06/apples-differential-privacy-collecting-data/). With this process, Apple know how many people or devices use what and how often. Apple also knows about their user’s habits as a collective, not individuals. [There's not a lot of transparency](https://www.schneier.com/blog/archives/2016/06/apples_differen.html) about what's going on but there are many free and open source applications that help us shut down and block as many as we know about.
+
+First, I recommend you look through [PrivacyTools.io](https://www.privacytools.io/). There's a ton of valuable software and links to consume.
+
+One of the more popular network monitors and script blockers is called [Little Snitch](https://www.obdev.at/products/littlesnitch/index.html). It will keep applications from reporting back stats that can compromise privacy and security.
 
 ## RVM and Ruby
 
@@ -200,28 +205,28 @@ Ruby does come pre-installed on Mac, but you probably shouldn't be tinkering aro
 
 Installing RVM, Ruby and Rails can be done with just one command! If you don't plan to use Rails, you can replace `--rails` with `--ruby` in the commands below:
 
-    $ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-    $ \curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
+    gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+    \curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
 
 For more installation options, see the [RVM documentation](https://github.com/rvm/rvm#installation).
 
 In rare cases that you need to reopen multiple shell windows, you need to run the following command in all your open shell windows:
 
-    $ source /Users/{username}/.rvm/script/rvm
+    source /Users/{username}/.rvm/script/rvm
 
 Replace `{username}` with your computer's user name which can be found right in your Terminal's prompt.
 
 After it's done, quit and relaunch Terminal, then run this command:
 
-    $ rvm | head -n 1
+    rvm | head -n 1
 
 If you get rvm is a function, that means RVM was successfully installed. If not, go to the Troubleshooting section.
 
 To make sure the latest versions of RVM, Ruby and Rails were installed, run the commands below:
 
-    $ rvm -v
-    $ ruby -v
-    $ rails -v
+    rvm -v
+    ruby -v
+    rails -v
 
 ### RVM and ZSH
 
@@ -248,7 +253,7 @@ What's a developer without [Git](http://git-scm.com/)?
     git config --global user.name "Your Name Here"
     git config --global user.email "your_email@youremail.com"
 
-**Note**: On a Mac, it is important to remember to add `.DS_Store` (a hidden OS X system file that's put in folders) to your `.gitignore` files. You can take a look at this repository's [.gitignore](/nicolahery/mac-dev-setup/blob/master/.gitignore) file for inspiration.
+**Note**: It is important to remember to add `.DS_Store` (a hidden system file that's put in folders) to your `.gitignore` files. You can take a look at this repository's [.gitignore](/nicolahery/mac-dev-setup/blob/master/.gitignore) file for inspiration.
 
 ## Node.js
 
@@ -261,9 +266,7 @@ It also installs the [npm](https://npmjs.org/) package manager.
 As suggested by the Homebrew output, we need to add `/usr/local/share/npm/bin` to our path so that npm-installed modules with executables will have them picked up. To do so, add this line to your `~/.path` file, before the `export PATH` line:
 
 ```bash
-
 PATH=/usr/local/share/npm/bin:$PATH
-
 ```
 
 Open a new terminal for the `$PATH` changes to take effect.
@@ -281,27 +284,31 @@ Node modules are installed locally in the `node_modules` folder of each project 
 
 To install a package:
 
-    npm install <package> # Install locally
-    npm install -g <package> # Install globally
-
-To install a package and save it in your project's `package.json` file:
-
-    npm install <package> --save
+```bash
+npm install <package> # Install locally
+npm install -g <package> # Install globally
+npm install <package> --save # Insert into package.json as dependency
+npm install <package> --save-dev # Insert into package.json as devDependency    
+```
 
 To see what's installed:
 
-    npm list # Local
-    npm list -g # Global
+```bash
+npm list # Local
+npm list -g # Global
+```
 
 Other useful commands:
 
-    npm outdated # Outdated packages
-    npm update <package> # Update a package
-    npm uninstall <package> # Uninstall a package
+```bash
+npm outdated # Outdated packages
+npm update <package> # Update a package
+npm uninstall <package> # Uninstall a package
+```
     
 ## ES6
 
-Javascript frameworks such as Angular, React and Vue now rely on the newest version of Javascript starting with ECMAScript 2015 (ES6). Browser quirks that gave rise to jQuery are less problematic because web standards are regularly implemented and iterated. Thus, the golden age of Javascript is upon us.
+Javascript frameworks such as Angular, React and Vue now rely on the newest versions of Javascript starting with ECMAScript 2015 (ES6). Browser quirks that gave rise to jQuery are less problematic because web standards are regularly implemented and iterated. Thus, the golden age of Javascript is upon us.
 
 Until browsers catch up implementing the newest features of ES6, it is recommended to use a transpiler to convert your unsupported ES6 back to ES5, which is universally supported in all modern browsers.
 
@@ -315,11 +322,17 @@ Since it's generally a bad idea to run Babel globally you may want to uninstall 
 
 Install your preprocessor of choice, but I highly recommend using Sass. They all do the same thing but Sass has the most momentum behind it right now.
 
-With WSL command line:
-
     npm install -g sass
 
 Keep in mind that the utility that Sass offers is slowly being complimented and deprecated with the rise of [CSS variables](https://medium.freecodecamp.org/everything-you-need-to-know-about-css-variables-c74d922ea855).
+
+## PHP and Composer
+
+PHP is still one of the most used programming languages on the web, thanks in part to the amount of sites still using WordPress. We need a way to manage PHP scripts and packages similarly to how we manage JS dependencies using NPM.
+
+One of the most popular PHP dependency managers is called [Composer](https://getcomposer.org/). The difference between Composer and NPM, for example, is that Composer works on a project-by-project basis, there is no global installations. So you must run and setup Composer on every new project if you want to use it.
+
+To install Composer globally, go to the [Download page](https://getcomposer.org/download/) and run the package installer.
 
 ## Sublime Text, Atom, and VSCode
 
@@ -383,11 +396,10 @@ Vim's default settings aren't great, and you could spend a lot of time tweaking 
 
 First, install [pathogen.vim](https://github.com/tpope/vim-pathogen) by running:
 
-    mkdir -p ~/.vim/autoload ~/.vim/bundle
-    curl -Sso ~/.vim/autoload/pathogen.vim \
-        https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-Then create a file `~/.vimrc` (you can use `$ subl ~/.vimrc`), and paste in the following:
+If you're brand new to Vim and lacking a vimrc, vim ~/.vimrc and paste in the following super-minimal example:
 
     execute pathogen#infect()
     syntax on
@@ -395,7 +407,7 @@ Then create a file `~/.vimrc` (you can use `$ subl ~/.vimrc`), and paste in the 
 
 And finally, install the Vim "sensible defaults" by running:
 
-    cd ~/.vim/bundle
+    cd ~/.vim/bundle && \
     git clone git://github.com/tpope/vim-sensible.git
 
 With that, Vim will look a lot better next time you open it!
@@ -425,46 +437,6 @@ The brilliance of vagrant is its ability to be so portable. When you have a proj
     vagrant up
 
 A great box to use for new projects is called [Scotch Box](https://box.scotch.io/). It is fully-featured and contains everything I need built in to get started with many projects using PHP, JS or Ruby. For a WordPress environment, [Roots](https://roots.io/) has [Trellis](https://roots.io/trellis/) which includes everything you need for a powerful VM.
-
-## MongoDB
-
-[MongoDB](http://www.mongodb.org/) is a popular [NoSQL](http://en.wikipedia.org/wiki/NoSQL) database.
-
-### Install
-
-Installing it is very easy through Homebrew:
-
-    brew install mongo
-
-### Usage
-
-In a terminal, start the MongoDB server:
-
-    mongod
-
-In another terminal, connect to the database with the Mongo shell using:
-
-    mongo
-
-I'll let you refer to MongoDB's [Getting Started](http://docs.mongodb.org/manual/tutorial/getting-started/) guide for more!
-
-## Composer
-
-Because so many people use PHP in their day to day work, we need a way to manage PHP scripts and packages similarly to how we manage JS dependencies using NPM and Bower.
-
-One of the most popular PHP dependency managers is called [Composer](https://getcomposer.org/). The difference between Composer and NPM, for example, is that Composer works on a project-by-project basis, there is no global installations. So you must run and setup Composer on every new project if you want to use it.
-
-To install Composer, let's go back to Terminal and [use the following commands](https://getcomposer.org/doc/00-intro.md#globally):
-
-```php
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-mv composer.phar /usr/local/bin/composer
-```
-
-What this does is downloads a file called `composer.phar` and then moves it to the same global directory that other package managers live so that you can use it in any directory on OS X.
 
 ## TODO
 - look over rbenv https://github.com/sstephenson/rbenv

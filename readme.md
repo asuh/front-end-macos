@@ -4,12 +4,11 @@ This document assumes you're running a fresh and updated copy of **macOS "former
 
 The following workflow assumes a clean installation of macOS. While it's okay to have third-party software installed, the installation process will be more streamlined and less convoluted with a new macOS.
 
-- [Command Line Shell](#command-line-shell)
+- [Command Line Interface](#command-line-interface)
 - [System update and Disk Encryption](#system-update-and-disk-encryption)
 - [System tweaks](#system-tweaks)
 - [Projects Directory](#projects-directory)
 - [Xcode Command Line Tools](#xcode-command-line-tools)
-- [ZSH](#zsh-optional)
 - [Homebrew](#homebrew)
 - [Homebrew Cask](#homebrew-cask)
 - [Privacy](#privacy)
@@ -23,8 +22,9 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Vim](#vim)
 - [VirtualBox](#virtualbox)
 - [Vagrant](#vagrant)
+- [ZSH](#zsh-optional)
 
-## Command Line Shell
+## Command Line Interface
 
 Throughout this document, you will encounter examples like this that contain one or more of the arguments listed:
 
@@ -32,9 +32,9 @@ Throughout this document, you will encounter examples like this that contain one
 sudo command -flag --flag directory file.extention # Comments are behind pound signs
 ```
 
-Front-end development has increasingly moved towards an open-source, command-line interface (CLI) dependent workflow. Whether we access modules, packages or simply useful commands, setting up a command-line shell to your liking is a good idea to start.
-    
 Anytime you see this, it is referring to your CLI of choice, whether it's the built-in Terminal.app or a third-party application like [iTerm2](https://iterm2.com/).
+
+Front-end development has increasingly moved towards an open-source driven, command-line interface (CLI) dependent workflow. Whether we access modules, packages or simply useful commands, setting up a command-line shell to your liking is a good idea.
 
 ## System update and Disk Encryption
 
@@ -123,18 +123,6 @@ For older OSes, go to [http://developer.apple.com/downloads](http://developer.ap
 
 Once you reach the downloads page, search for "command line tools", and download **Command Line Tools for Xcode**. Open the **.dmg** file once it's done downloading, and double-click on the **.mpkg** installer to launch the installation. When it's done, you can unmount the disk in Finder.
 
-## ZSH (optional)
-
-By default, Terminal is using Bash Unix shell. Bash contains the command language used to interact with Unix functions, such as `pwd`, `ls`, and `cd`.
-
-[Z Shell](https://en.wikipedia.org/wiki/Z_shell), or ZSH, was written to extend Bash and make improvements to how Bash works. One of the most popular frameworks written around ZSH is called [Oh My Zsh!](http://ohmyz.sh/).
-
-Install it with the following command:
-
-    curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
-
-Now you have ZSH installed. [Sign up and follow the videos recorded by Wes Bos](http://commandlinepoweruser.com/) to learn a ton more about ZSH and why it's so powerful.
-
 ## Homebrew
 
 Package managers make it so much easier to install and update applications (for Operating Systems) or libraries (for programming languages). The most popular one for OS X is [Homebrew](http://brew.sh/).
@@ -165,13 +153,12 @@ brew list --versions # check installed packages and versions
 
 ## Homebrew Cask
 
-Homebrew Cask extends Homebrew to let you install applications and large binaries. Use it to install browsers and editors!
+Homebrew Cask extends Homebrew to let you install applications and large binaries. Use it to install macOS software like browsers, editors and tools.
 
-    brew tap caskroom/cask
-
-For archived and beta/alpha software, there's an addition called alternative versions of Casks
-
-    brew tap homebrew/cask-versions
+```bash
+brew tap caskroom/cask # for modern software
+brew tap homebrew/cask-versions # archived and beta/alpha software
+```
 
 Let's test this by installing Firefox.
 
@@ -179,7 +166,7 @@ Let's test this by installing Firefox.
 
 ### Installing multiple applications
 
-Brew Cask is awesome because now that you understand what it does, you can install all your favorite apps in one command! Here's a list of my favorite apps, including Google Chrome, that I need for development on a regular basis.
+Brew Cask is awesome because now that you understand what it does, you can install all your favorite apps in one command! Here's a list of my favorite apps, including Google Chrome, that I need for development on a regular basis (requires both cask commands above).
 
     brew cask install google-chrome google-chrome-canary chromium firefox firefox-developer-edition opera brave torbrowser slack sublime-text-dev visual-studio-code atom sourcetree imageoptim imagealpha google-nik-collection vlc filezilla transmission skype virtualbox authy appcleaner vagrant tunnelblick slack
 
@@ -208,7 +195,7 @@ Installing RVM, Ruby and Rails can be done with just one command! If you don't p
     gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
     \curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
 
-For more installation options, see the [RVM documentation](https://github.com/rvm/rvm#installation).
+For more installation options, see the [RVM documentation](https://github.com/rvm/rvm#installing-rvm).
 
 In rare cases that you need to reopen multiple shell windows, you need to run the following command in all your open shell windows:
 
@@ -253,7 +240,7 @@ What's a developer without [Git](http://git-scm.com/)?
     git config --global user.name "Your Name Here"
     git config --global user.email "your_email@youremail.com"
 
-**Note**: It is important to remember to add `.DS_Store` (a hidden system file that's put in folders) to your `.gitignore` files. You can take a look at this repository's [.gitignore](/nicolahery/mac-dev-setup/blob/master/.gitignore) file for inspiration.
+**Note**: It is important to remember to add `.DS_Store` (a hidden system file that's put in folders) to your `.gitignore` files. You can take a look at this repository's [.gitignore](https://github.com/nicolashery/mac-dev-setup/blob/master/.gitignore) file for inspiration.
 
 ## Node.js
 
@@ -437,6 +424,18 @@ The brilliance of vagrant is its ability to be so portable. When you have a proj
     vagrant up
 
 A great box to use for new projects is called [Scotch Box](https://box.scotch.io/). It is fully-featured and contains everything I need built in to get started with many projects using PHP, JS or Ruby. For a WordPress environment, [Roots](https://roots.io/) has [Trellis](https://roots.io/trellis/) which includes everything you need for a powerful VM.
+
+## ZSH (optional)
+
+[Z Shell](https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH), or ZSH, was written to extend Bash and make improvements to how Bash works. 
+
+    brew install zsh zsh-completions
+
+One of the most popular frameworks written around ZSH is called [Oh My Zsh!](http://ohmyz.sh/).
+
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+[Sign up and follow the videos recorded by Wes Bos](http://commandlinepoweruser.com/) to learn a ton more about ZSH and why it's so powerful.
 
 ## TODO
 - look over rbenv https://github.com/sstephenson/rbenv

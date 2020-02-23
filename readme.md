@@ -13,6 +13,7 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Homebrew Cask](#homebrew-cask)
 - [Privacy](#privacy)
 - [NVM](#nvm)
+- [ZSH](#zsh)
 - [RVM & Ruby](#rvm-and-ruby)
 - [Node.js](#nodejs)
 - [Git](#git)
@@ -24,7 +25,6 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Vim](#vim)
 - [VirtualBox](#virtualbox)
 - [Vagrant](#vagrant)
-- [ZSH](#zsh-optional)
 
 ## Command Line Interface
 
@@ -197,11 +197,13 @@ One of the more popular network monitors and script blockers is called [Little S
 
 ## ZSH
 
-macOS 10.15 and newer come with zsh as the default shell. Install Oh My Zsh for sensible defaults.
+macOS 10.15 and newer come with zsh as the default shell. Install [Oh My Zsh!](http://ohmyz.sh/) for extra help and nice defaults. 
 
 ```bash
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
+
+[Sign up and follow the videos recorded by Wes Bos](http://commandlinepoweruser.com/) to learn a ton more about ZSH and why it's so powerful. Or a [free 80 minute video on YouTube by Karl Hadwen](https://www.youtube.com/watch?v=MSPu-lYF-A8).
 
 ## RVM and Ruby
 
@@ -488,18 +490,6 @@ The brilliance of vagrant is its ability to be so portable. When you have a proj
     vagrant up
 
 A great box to use for new projects is called [Scotch Box](https://box.scotch.io/). It is fully-featured and contains everything I need built in to get started with many projects using PHP, JS or Ruby. For a WordPress environment, [Roots](https://roots.io/) has [Trellis](https://roots.io/trellis/) which includes everything you need for a powerful VM.
-
-## ZSH (optional)
-
-[Z Shell](https://github.com/robbyrussell/oh-my-zsh/wiki/Installing-ZSH), or ZSH, was written to extend Bash and make improvements to how Bash works. 
-
-    brew install zsh zsh-completions
-
-One of the most popular frameworks written around ZSH is called [Oh My Zsh!](http://ohmyz.sh/).
-
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-[Sign up and follow the videos recorded by Wes Bos](http://commandlinepoweruser.com/) to learn a ton more about ZSH and why it's so powerful.
 
 ## TODO
 - look over rbenv https://github.com/sstephenson/rbenv

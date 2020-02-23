@@ -14,7 +14,6 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Privacy](#privacy)
 - [NVM](#nvm)
 - [ZSH](#zsh)
-- [RVM & Ruby](#rvm-and-ruby)
 - [Node.js](#nodejs)
 - [Git](#git)
 - [SSH](#ssh)
@@ -183,7 +182,7 @@ Let's test this by installing Firefox.
 
 Brew Cask is awesome because now that you understand what it does, you can install all your favorite apps in one command! Here's a list of my favorite apps, including Google Chrome, that I need for development on a regular basis (requires both cask commands above).
 
-    brew cask install google-chrome google-chrome-canary chromium firefox firefox-developer-edition opera brave torbrowser slack sublime-text-dev visual-studio-code atom sourcetree imageoptim imagealpha google-nik-collection vlc filezilla transmission skype virtualbox authy appcleaner vagrant tunnelblick slack iterm2 docker
+    brew cask install google-chrome google-chrome-canary firefox firefox-developer-edition brave torbrowser slack sublime-text-dev vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc filezilla transmission skype virtualbox authy appcleaner vagrant docker tunnelblick slack iterm2
 
 Note: Most modern browsers contain PDF readers like Adobe Reader and sometimes Flash and Java by default. Running standalone versions of each is not recommended because they are a security risk without regular maintenance and updates.
 
@@ -204,58 +203,6 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 ```
 
 [Sign up and follow the videos recorded by Wes Bos](http://commandlinepoweruser.com/) to learn a ton more about ZSH and why it's so powerful. Or a [free 80 minute video on YouTube by Karl Hadwen](https://www.youtube.com/watch?v=MSPu-lYF-A8).
-
-## RVM and Ruby
-
-Ruby does come pre-installed on Mac, but you probably shouldn't be tinkering around with that version. It's best to install a ruby version manager to take care of anything that one might screw up messing around with your system's version of Ruby.
-
-[RVM](https://rvm.io) stands for Ruby Version Manager and is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to sets of gems.
-
-(Optional) If you plan on installing Rails, I first recommend disabling documentation. RVM installs documentation for every gem that Rails depends on and will slow down installation.
-
-    echo "gem: --no-document" >> ~/.gemrc
-
-Installing RVM, Ruby and Rails can be done with just one command! If you don't plan to use Rails, you can replace `--rails` with `--ruby` in the commands below:
-
-    gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-    \curl -sSL https://get.rvm.io | bash -s stable --auto-dotfiles --autolibs=enable --rails
-
-For more installation options, see the [RVM documentation](https://github.com/rvm/rvm#installing-rvm).
-
-In rare cases that you need to reopen multiple shell windows, you need to run the following command in all your open shell windows:
-
-    source /Users/{username}/.rvm/script/rvm
-
-Replace `{username}` with your computer's user name which can be found right in your Terminal's prompt.
-
-After it's done, quit and relaunch Terminal, then run this command:
-
-    rvm | head -n 1
-
-If you get rvm is a function, that means RVM was successfully installed. If not, go to the Troubleshooting section.
-
-To make sure the latest versions of RVM, Ruby and Rails were installed, run the commands below:
-
-    rvm -v
-    ruby -v
-    rails -v
-
-### RVM and ZSH
-
-If you previously installed ZSH, Terminal might throw the following error at the top of any new Terminal session:
-
-    Warning: PATH set to RVM ruby but GEM_HOME and/or GEM_PATH not set, see:
-    https://github.com/rvm/rvm/issues/3212
-
-To [resolve this issue](https://stackoverflow.com/questions/27784961/received-warning-message-path-set-to-rvm-after-updating-ruby-version-using-rvm), open the .zshrc file and change the follow path from:
-
-    export PATH="/path/to/something"
-
-to
-
-    export PATH="$PATH:/path/to/something"
-
-If your export `PATH` has no quotations, it will still work correctly just by entering `$PATH:` into the export `PATH`.
 
 ## Node.js
 

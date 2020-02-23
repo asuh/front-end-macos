@@ -12,9 +12,11 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Homebrew](#homebrew)
 - [Homebrew Cask](#homebrew-cask)
 - [Privacy](#privacy)
+- [NVM](#nvm)
 - [RVM & Ruby](#rvm-and-ruby)
-- [Git](#git)
 - [Node.js](#nodejs)
+- [Git](#git)
+- [SSH](#ssh)
 - [ES6](#es6)
 - [Sass](#sass)
 - [Composer](#composer)
@@ -39,12 +41,12 @@ Front-end development has increasingly moved towards an open-source driven, comm
 ## System update and Disk Encryption
 
 Step One - Update the system!
-**Apple Icon > App Store > Updates**
+**Apple Icon > System Preferences > Software Updates**
 
 Step Two - Turn on FileValut
 **Apple Icon > System Preferences > Privacy & Security > FileVault**
 
-Click on the lock to allow you to turn on and enable FileVault. On a brand new machine or macOS installation, it should take around an hour or less to get this done depending on the size of your drive.
+Click on the lock (bottom-left of window) to allow you to turn on and enable FileVault. On a brand new machine or macOS installation, it should take around an hour or less to get this done depending on the size of your drive.
 
 Alternatively, you can use a third-party encryption software like [Veracrypt](https://en.wikipedia.org/wiki/VeraCrypt/), which is open-source and well regarded in the security community.
 
@@ -55,14 +57,16 @@ Why do you want [full-disk encryption](https://en.wikipedia.org/wiki/Disk_encryp
 You're most likely using a portable laptop of some kind. If you lose it, the laptop gets stolen or someone tries to hack into it, your personal data is at risk. Using full-disk encryption is an extra layer of security to keep your mind at ease in case of potential intrusion.
 
 Two main caveats:
-- Make sure you do not forget your FileVault password. Losing this password means you cannot log in and everything on your computer is inaccessible. iCloud is an option to store the Filevault password and this means that Apple Support will be able to assist you with recovering data.
-- If macOS gets corrupted and you need to download files from the drive after accessing the drive from an external case, it's not possible. Make sure you're both backing up using [Time Machine](https://support.apple.com/en-us/HT201250) on an external drive or a NAS, and a cloud backup provider like [Backblaze](https://www.backblaze.com/), [Carbonite](https://carbonite.com/), or [iDrive](https://www.idrive.com).
+- **Do not misplace or forget your FileVault recovery key or login password**. Losing this password means you cannot log in and without the recovery key everything on your computer is inaccessible if you can't decrypt the files during a recovery. iCloud is an option to store the Filevault password. Using iCloud, Apple Support will be able to assist you with recovering data. iCloud isn't fully encrypted so whilt it's convenient, it's less secure.
+- If macOS gets corrupted and you need to download files from the drive after accessing the drive from an external case, it's not possible without the password and recovery key. Make sure you're both backing up using [Time Machine](https://support.apple.com/en-us/HT201250) on an external drive or a NAS, and a cloud backup provider like [Backblaze](https://www.backblaze.com/), [Carbonite](https://carbonite.com/), or [iDrive](https://www.idrive.com).
 
 ### Enable Firewall
 
 This is for online protection when you're not in your home network or not behind a router.
 
-    sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+```bash
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+```
 
 ## System Tweaks
 
@@ -72,31 +76,41 @@ Apple's default system settings are limiting and don't show a lot of information
 
     chflags nohidden ~/Library
     
-Alternatively, open Finder, press `⇧⌘H`, `⌘2`, `⌘J` and check “Show Library Folder”.
+Alternatively, open Finder, press `⇧⌘H`, `⌘2`, `⌘J` and check “Show Library Folder”. Unhiding this folder could be useful for manual backup, but it's not necessary.
 
 ### Show Path Bar and Status Bar in Finder
 
-    defaults write com.apple.finder ShowPathbar -bool true
-    defaults write com.apple.finder ShowStatusBar -bool true
+```bash
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+```
 
 ### Show Full Path in Finder Title Bar
 
-    defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+```bash
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+```
 
 ### Prevent Time Machine from Prompting to Use New Hard Drives as Backup Volume
 
-I don’t use Time Machine. It is better than nothing but not necessary. I don’t need these annoying windows popping up whenever I’m plugging in a new external harddrive.
+I don’t use Time Machine. It is better than nothing but not necessary. But keep this on if you have an external drive you use for backups.
 
-    sudo defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+```bash
+sudo defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+```
 
 ### Show All File Extensions
 
-    defaults write -g AppleShowAllExtensions -bool true
+```bash
+defaults write -g AppleShowAllExtensions -bool true
+```
     
 ### Disable Creation of DS_Store Files on Network Volumes and USB Drives
 
-    defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-    defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+```bash
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+```
 
 ## Projects Directory
 
@@ -111,7 +125,7 @@ Depending on the type of projects you work on, this might not be necessary or pr
 
 ## Xcode Command Line Tools
 
-An important dependency before Homebrew can work is the **Command Line Tools** for **Xcode**. These include compilers that will allow you to build things from source.
+An optional but nice-to-have add-on is **Command Line Tools** for **Xcode**. These include compilers that will allow you to build things from source.
 
 Xcode weighs something ~2GB and is useful for the iOS simulator but is not necessary unless you're developing iOS or Mac apps. Good news is Apple provides a way to install only the Command Line Tools, without Xcode.
 
@@ -119,7 +133,8 @@ Using Terminal, install the Xcode Command Line Tools:
 
     xcode-select --install
 
-For older OSes, go to [http://developer.apple.com/downloads](http://developer.apple.com/downloads), and sign in with your Apple ID (the same one you use for iTunes and app purchases).
+### Older OSes
+Go to [http://developer.apple.com/downloads](http://developer.apple.com/downloads), and sign in with your Apple ID (the same one you use for iTunes and app purchases).
 
 Once you reach the downloads page, search for "command line tools", and download **Command Line Tools for Xcode**. Open the **.dmg** file once it's done downloading, and double-click on the **.mpkg** installer to launch the installation. When it's done, you can unmount the disk in Finder.
 
@@ -168,9 +183,9 @@ Let's test this by installing Firefox.
 
 Brew Cask is awesome because now that you understand what it does, you can install all your favorite apps in one command! Here's a list of my favorite apps, including Google Chrome, that I need for development on a regular basis (requires both cask commands above).
 
-    brew cask install google-chrome google-chrome-canary chromium firefox firefox-developer-edition opera brave torbrowser slack sublime-text-dev visual-studio-code atom sourcetree imageoptim imagealpha google-nik-collection vlc filezilla transmission skype virtualbox authy appcleaner vagrant tunnelblick slack
+    brew cask install google-chrome google-chrome-canary chromium firefox firefox-developer-edition opera brave torbrowser slack sublime-text-dev visual-studio-code atom sourcetree imageoptim imagealpha google-nik-collection vlc filezilla transmission skype virtualbox authy appcleaner vagrant tunnelblick slack iterm2 docker
 
-Note: Google Chrome contains Adobe Reader, Flash and Java by default. Running standalone versions of each is not recommended because they are a security risk without regular maintenance and updates.
+Note: Most modern browsers contain PDF readers like Adobe Reader and sometimes Flash and Java by default. Running standalone versions of each is not recommended because they are a security risk without regular maintenance and updates.
 
 ## Privacy
 
@@ -179,6 +194,14 @@ I think now is the time to briefly let you know that macOS communicates with rem
 First, I recommend you look through [PrivacyTools.io](https://www.privacytools.io/). There's a ton of valuable software and links to consume.
 
 One of the more popular network monitors and script blockers is called [Little Snitch](https://www.obdev.at/products/littlesnitch/index.html). It will keep applications from reporting back stats that can compromise privacy and security.
+
+## ZSH
+
+macOS 10.15 and newer come with zsh as the default shell. Install Oh My Zsh for sensible defaults.
+
+```bash
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
 
 ## RVM and Ruby
 
@@ -232,25 +255,19 @@ to
 
 If your export `PATH` has no quotations, it will still work correctly just by entering `$PATH:` into the export `PATH`.
 
-## Git
-
-What's a developer without [Git](http://git-scm.com/)?
-
-    brew install git
-    git config --global user.name "Your Name Here"
-    git config --global user.email "your_email@youremail.com"
-
-**Note**: It is important to remember to add `.DS_Store` (a hidden system file that's put in folders) to your `.gitignore` files. You can take a look at this repository's [.gitignore](https://github.com/nicolashery/mac-dev-setup/blob/master/.gitignore) file for inspiration.
-
 ## Node.js
 
-Install [Node.js](http://nodejs.org/) with Homebrew:
+For modern Javascript programming, Node.js is required. There are two ways to install Node depending on your needs.
+
+1. Install [Node.js](http://nodejs.org/) with Homebrew:
 
     brew install node
 
-It also installs the [npm](https://npmjs.org/) package manager. 
+2. Install [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm/) which installs Node.js. NVM allows you to easily switch between Node versions and is useful for projects on different versions of Node.
 
-As suggested by the Homebrew output, we need to add `/usr/local/share/npm/bin` to our path so that npm-installed modules with executables will have them picked up. To do so, add this line to your `~/.path` file, before the `export PATH` line:
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+
+If you used Homebrew, we need to add `/usr/local/share/npm/bin` to our path so that npm-installed modules with executables will have them picked up. To do so, add this line to your `~/.path` file, before the `export PATH` line:
 
 ```bash
 PATH=/usr/local/share/npm/bin:$PATH
@@ -262,12 +279,29 @@ We also need to tell npm where to find the Xcode Command Line Tools, by running:
 
     sudo xcode-select -switch /usr/bin
 
-Node modules are installed locally in the `node_modules` folder of each project by default, but there's at least a couple that are worth installing globally such as [Gulp](http://gulpjs.com/) or [webpack](https://webpack.js.org/), depending on your project requirements:
+Node modules are installed locally in the `node_modules` folder of each project by default, but there's at least a couple that are worth installing globally such as [Gulp](http://gulpjs.com/) or [webpack](https://webpack.js.org/), depending on your project requirements.
 
-    npm install -g gulp
-    npm install webpack webpack-cli --save-dev
+### nvm usage
 
-### Npm usage
+When you enter a project, you can install Node using NVM.
+
+    nvm install node
+
+Restart terminal and run the final command.
+
+    nvm use node
+
+Confirm that you are using the latest version of Node and npm.
+
+    node -v
+    npm -v
+
+You can switch to another version and use it by changing to the directory where you want to use Node and run the following.
+
+    nvm install xx.xx
+    nvm use xx.xx
+
+### npm usage
 
 To install a package:
 
@@ -293,6 +327,36 @@ npm update <package> # Update a package
 npm uninstall <package> # Uninstall a package
 ```
     
+## Git
+
+What's a developer without [Git](http://git-scm.com/)?
+
+    brew install git
+    git config --global user.name "Your Name Here"
+    git config --global user.email "your_email@youremail.com"
+
+**Note**: It is important to remember to add `.DS_Store` (a hidden system file that's put in folders) to your `.gitignore` files. You can take a look at this repository's [.gitignore](https://github.com/nicolashery/mac-dev-setup/blob/master/.gitignore) file for inspiration.
+
+## SSH
+
+Whether it's Github or directly working on servers, SSH has become imperative for modern projects. 
+
+[Github has excellent instructions for setting up git and connecting it to a Github account](https://help.github.com/en/github/getting-started-with-github/set-up-git)
+
+Now you can add a little shortcut to make SSHing into other boxes easier. Paste the following block of code into your SSH config file at `~/.ssh/config`, changing the variables for any hosts that you connect to.
+
+```ssh
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+
+Host myssh
+  HostName example.com
+  User user
+  IdentityFile ~/.ssh/key.pem
+```
+
 ## ES6
 
 Javascript frameworks such as Angular, React and Vue now rely on the newest versions of Javascript starting with ECMAScript 2015 (ES6). Browser quirks that gave rise to jQuery are less problematic because web standards are regularly implemented and iterated. Thus, the golden age of Javascript is upon us.

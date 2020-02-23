@@ -12,7 +12,6 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Homebrew](#homebrew)
 - [Homebrew Cask](#homebrew-cask)
 - [Privacy](#privacy)
-- [NVM](#nvm)
 - [ZSH](#zsh)
 - [Node.js](#nodejs)
 - [Git](#git)

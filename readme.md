@@ -22,6 +22,7 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Sublime Text, Atom, and VSCode](#sublime-text-atom-and-vscode)
 - [Vim](#vim)
 - [VirtualBox](#virtualbox)
+- [Docker](#docker)
 - [Vagrant](#vagrant)
 
 ## Command Line Interface
@@ -181,7 +182,7 @@ Let's test this by installing Firefox.
 
 Brew Cask is awesome because now that you understand what it does, you can install all your favorite apps in one command! Here's a list of my favorite apps, including Google Chrome, that I need for development on a regular basis (requires both cask commands above).
 
-    brew cask install google-chrome google-chrome-canary firefox firefox-developer-edition brave torbrowser slack sublime-text-dev vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc filezilla transmission skype virtualbox authy appcleaner vagrant docker tunnelblick slack iterm2
+    brew cask install firefox firefox-developer-edition brave torbrowser slack sublime-text-dev vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc signal transmission skype virtualbox authy appcleaner vagrant docker tunnelblick iterm2 libreoffice wireguard-tools zoomus
 
 Note: Most modern browsers contain PDF readers like Adobe Reader and sometimes Flash and Java by default. Running standalone versions of each is not recommended because they are a security risk without regular maintenance and updates.
 
@@ -201,6 +202,11 @@ macOS 10.15 and newer come with zsh as the default shell. Install [Oh My Zsh!](h
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
+Don't forget to customize ZSH!
+
+[Themes](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes) are available.
+[Autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) will improve ZSH user experience too.
+
 [Sign up and follow the videos recorded by Wes Bos](http://commandlinepoweruser.com/) to learn a ton more about ZSH and why it's so powerful. Or a [free 80 minute video on YouTube by Karl Hadwen](https://www.youtube.com/watch?v=MSPu-lYF-A8).
 
 ## Node.js
@@ -213,9 +219,9 @@ For modern Javascript programming, Node.js is required. There are two ways to in
 
 2. Install [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm/) which installs Node.js. NVM allows you to easily switch between Node versions and is useful for projects on different versions of Node.
 
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
-If you used Homebrew, we need to add `/usr/local/share/npm/bin` to our path so that npm-installed modules with executables will have them picked up. To do so, add this line to your `~/.path` file, before the `export PATH` line:
+If you installed Homebrew, we need to add `/usr/local/share/npm/bin` to our path so that npm-installed modules with executables will have them picked up. To do so, add this line to your `~/.path` file, before the `export PATH` line:
 
 ```bash
 PATH=/usr/local/share/npm/bin:$PATH
@@ -307,11 +313,11 @@ Host myssh
 
 ## ES6
 
-Javascript frameworks such as Angular, React and Vue now rely on the newest versions of Javascript starting with ECMAScript 2015 (ES6). Browser quirks that gave rise to jQuery are less problematic because web standards are regularly implemented and iterated. Thus, the golden age of Javascript is upon us.
+Javascript libraries such as React and Vue use modern versions of Javascript starting with ECMAScript 2015 (ES6). Browser quirks that gave rise to jQuery are less problematic because web standards are regularly implemented and iterated. Thus, a golden age of Javascript is upon us.
 
 Until browsers catch up implementing the newest features of ES6, it is recommended to use a transpiler to convert your unsupported ES6 back to ES5, which is universally supported in all modern browsers.
 
-The most popular transpiler is Babel(https://babeljs.io/). Only install this locally into an already created project.
+The most popular transpiler is Babel(https://babeljs.io/). Only install this locally into an already created project if you need ES5 support. Check your project, it might already use Babel and you can skip this step.
 
     npm install --save-dev babel-cli babel-preset-env
 
@@ -319,11 +325,11 @@ Since it's generally a bad idea to run Babel globally you may want to uninstall 
 
 ## Sass
 
-Install your preprocessor of choice, but I highly recommend using Sass. They all do the same thing but Sass has the most momentum behind it right now.
+Install your preprocessor of choice, but I recommend using either Sass (or maybe PostCSS). They all do the same thing but Sass has the most momentum since the end of the 2010s.
 
     npm install -g sass
 
-Keep in mind that the utility that Sass offers is slowly being complimented and deprecated with the rise of [CSS variables](https://medium.freecodecamp.org/everything-you-need-to-know-about-css-variables-c74d922ea855).
+Keep in mind that the utility that Sass offers is slowly being complimented and deprecated with the rise of [CSS variables](https://www.freecodecamp.org/news/everything-you-need-to-know-about-css-variables-c74d922ea855/).
 
 ## PHP and Composer
 
@@ -356,7 +362,7 @@ I recommend to change two color settings:
 - **Theme** (which is how the tabs, the file explorer on the left, etc. look)
 - **Color Scheme** (the colors of the code).
 
-My favorite theme is [Material Design Darker](https://equinsuocha.io/material-theme/#/darker) and a close second to [Seti_UI Theme](https://packagecontrol.io/packages/Seti_UI). 
+My favorite theme is [Material Design Darker](https://github.com/equinusocio/material-theme) and a close second to [Seti_UI Theme](https://packagecontrol.io/packages/Seti_UI). 
 
 Go to **Tools > Command Palette** (Shift-Command-P), Highlight **Package Control: Install Package** and then search for Seti_UI, make sure it's highlighted then press Enter to install it.
 
@@ -381,7 +387,11 @@ The main problem for Atom as of autumn 2018 is that large files and projects not
 
 ### VSCode
 
-Visual Studio Code is 2018's "it" open-source code editor. There's a ton of great tutorials and articles, such as [VS Code Docs](https://code.visualstudio.com/docs/introvideos/basics) and [VS Code Can Do That?](https://vscodecandothat.com/).
+Visual Studio Code found popularity at the end of the 2010s and has become a staple open-source code editor for many front-end developers. I use it both personally and professionally because of various built-in features like git support, terminal integration and a similar-to-Sublime-Text repository of great plugins. I recommend using VSCodium, as it strips away the tracking that Github integrates into VSCode.
+
+    brew cask install vscodium
+
+There's a ton of great tutorials and articles, such as [VS Code Docs](https://code.visualstudio.com/docs/introvideos/basics) and [VS Code Can Do That?](https://vscodecandothat.com/).
 
 ## Vim
 
@@ -427,7 +437,7 @@ Once installed, you can easily install many [versions of Internet Explorer from 
 
 ## Vagrant
 
-I have personally tried to move away from MAMP for my dev environment. The alternative I've been enjoying a lot lately is called [Vagrant](https://www.vagrantup.com/). This gives you a powerful way to create a virtual and portable dev environment! It also has built-in connection to your local OS so that you develop in macOS but the environment runs in the VM.
+I have personally tried to move away from MAMP for my dev environment. The primary alternative I like is called [Vagrant](https://www.vagrantup.com/). It gives you a powerful way to create a virtual and portable dev environment! It also has built-in connection to your local OS so that you develop in macOS but the environment runs in the VM.
 
     brew cask install vagrant
 
@@ -437,9 +447,23 @@ The brilliance of vagrant is its ability to be so portable. When you have a proj
 
 A great box to use for new projects is called [Scotch Box](https://box.scotch.io/). It is fully-featured and contains everything I need built in to get started with many projects using PHP, JS or Ruby. For a WordPress environment, [Roots](https://roots.io/) has [Trellis](https://roots.io/trellis/) which includes everything you need for a powerful VM.
 
+## Docker
+
+Similar to Vagrant, I increasingly use Docker for professional projects. It comes with similar benefits to Vagrant, such as portability, encapsulation for the environment within the OS, and consistent environments. Docker goes a little further because it's a container manager it's lighter in resources and file size than Vagrant.
+
+    brew cask install docker
+    
+Docker can be quite powerful but complicated to set up. For this reason, I'm a fan of another project which is a wrapper around Docker called [Lando](https://lando.dev/). Originally designed for Drupal, it's increased support for many other environments including WordPress, Node.js, and Laravel.
+
+    brew cask install lando
+    
+For privacy, I recommend disabling tracking. Inside of your `.lando.yml` file, add the following:
+
+    stats:
+      - report: false
+        url: https://metrics.lando.dev
+
 ## TODO
-- look over rbenv https://github.com/sstephenson/rbenv
-- enable blackboxing [ manage framework blackboxing on chrome]
 - Allow apps downloaded from anywhere system preferences
 
 ## Credits

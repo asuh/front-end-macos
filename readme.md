@@ -209,6 +209,16 @@ Don't forget to customize ZSH!
 
 [Sign up and follow the videos recorded by Wes Bos](http://commandlinepoweruser.com/) to learn a ton more about ZSH and why it's so powerful. Or a [free 80 minute video on YouTube by Karl Hadwen](https://www.youtube.com/watch?v=MSPu-lYF-A8).
 
+## Git
+
+What's a developer without [Git](http://git-scm.com/)?
+
+    brew install git
+    git config --global user.name "Your Name Here"
+    git config --global user.email "your_email@youremail.com"
+
+**Note**: It is important to remember to add `.DS_Store` (a hidden system file that's put in folders) to your `.gitignore` files. You can take a look at this repository's [.gitignore](https://github.com/nicolashery/mac-dev-setup/blob/master/.gitignore) file for inspiration.
+
 ## Node.js
 
 For modern Javascript programming, Node.js is required. There are two ways to install Node depending on your needs.
@@ -219,7 +229,10 @@ For modern Javascript programming, Node.js is required. There are two ways to in
 
 2. Install [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm/) which installs Node.js. NVM allows you to easily switch between Node versions and is useful for projects on different versions of Node.
 
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+nvm install --lts # long-term support, which is not always the latest version
+```
 
 If you installed Homebrew, we need to add `/usr/local/share/npm/bin` to our path so that npm-installed modules with executables will have them picked up. To do so, add this line to your `~/.path` file, before the `export PATH` line:
 
@@ -232,8 +245,6 @@ Open a new terminal for the `$PATH` changes to take effect.
 We also need to tell npm where to find the Xcode Command Line Tools, by running:
 
     sudo xcode-select -switch /usr/bin
-
-Node modules are installed locally in the `node_modules` folder of each project by default, but there's at least a couple that are worth installing globally such as [Gulp](http://gulpjs.com/) or [webpack](https://webpack.js.org/), depending on your project requirements.
 
 ### nvm usage
 
@@ -254,42 +265,8 @@ You can switch to another version and use it by changing to the directory where 
 
     nvm install xx.xx
     nvm use xx.xx
-
-### npm usage
-
-To install a package:
-
-```bash
-npm install <package> # Install locally
-npm install -g <package> # Install globally
-npm install <package> --save # Insert into package.json as dependency
-npm install <package> --save-dev # Insert into package.json as devDependency    
-```
-
-To see what's installed:
-
-```bash
-npm list # Local
-npm list -g # Global
-```
-
-Other useful commands:
-
-```bash
-npm outdated # Outdated packages
-npm update <package> # Update a package
-npm uninstall <package> # Uninstall a package
-```
     
-## Git
-
-What's a developer without [Git](http://git-scm.com/)?
-
-    brew install git
-    git config --global user.name "Your Name Here"
-    git config --global user.email "your_email@youremail.com"
-
-**Note**: It is important to remember to add `.DS_Store` (a hidden system file that's put in folders) to your `.gitignore` files. You can take a look at this repository's [.gitignore](https://github.com/nicolashery/mac-dev-setup/blob/master/.gitignore) file for inspiration.
+Node modules are defined in a local `package.json` file inside your project. `npm install` will download external libraries and frameworks into each project's own `node_modules` folder by default. You'll never need to actually edit files in this folder, only reference them.
 
 ## SSH
 
@@ -341,7 +318,7 @@ To install Composer globally, go to the [Download page](https://getcomposer.org/
 
 ## Sublime Text, Atom, and VSCode
 
-The text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](http://en.wikipedia.org/wiki/Vim_(text_editor)) user, I recommend one of three editors: [Sublime Text](http://www.sublimetext.com/), [VSCode](https://code.visualstudio.com/) or [Atom](https://atom.io/).
+The text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) user, I recommend one of three editors: [Sublime Text](https://www.sublimetext.com/), [VSCode](https://code.visualstudio.com/) or [Atom](https://atom.io/).
 
 ### Sublime Text
 
@@ -351,7 +328,7 @@ My preferred editor is Sublime Text 3.
 
 I prefer using the [beta version of Sublime Text 3](https://sublimetext.com/3) which is usually just as stable as version 2.
 
-Sublime Text is not free, but it has an unlimited "evaluation period". The seemingly expensive $70 price tag is worth every penny. If you can afford it, I suggest you [support](http://www.sublimetext.com/buy) this awesome editor. :)
+Sublime Text is not free, but it has an unlimited "evaluation period". The seemingly expensive $70 price tag is worth every penny. If you can afford it, I suggest you [support](https://www.sublimetext.com/buy) this awesome editor. :)
 
 After installing Sublime Text, add [Package Control](https://packagecontrol.io/installation). This is the most important addition you'll make to Sublime Text and it'll give you the power to install plugins, add-ons, themes, color schemes and more.
 
@@ -364,7 +341,7 @@ I recommend to change two color settings:
 
 My favorite theme is [Material Design Darker](https://github.com/equinusocio/material-theme) and a close second to [Seti_UI Theme](https://packagecontrol.io/packages/Seti_UI). 
 
-Go to **Tools > Command Palette** (Shift-Command-P), Highlight **Package Control: Install Package** and then search for Seti_UI, make sure it's highlighted then press Enter to install it.
+Go to **Tools > Command Palette** (Shift-Command-P), Highlight **Package Control: Install Package** and then search for your preferred theme, make sure it's highlighted then press Enter to install it.
 
 Then go to **Sublime Text > Preferences > Settings - User** and add the following two lines (using Seti UI) and restart Sublime:
 
@@ -437,11 +414,11 @@ Once installed, you can easily install many [versions of Internet Explorer from 
 
 ## Vagrant
 
-I have personally tried to move away from MAMP for my dev environment. The primary alternative I like is called [Vagrant](https://www.vagrantup.com/). It gives you a powerful way to create a virtual and portable dev environment! It also has built-in connection to your local OS so that you develop in macOS but the environment runs in the VM.
+I have personally tried to move away from MAMP for my dev environment. The alternative I like is called [Vagrant](https://www.vagrantup.com/). It gives you a powerful way to create a virtual and portable dev environment! It also has built-in connection to your local OS so that you develop in macOS but the environment runs in the VM.
 
     brew cask install vagrant
 
-The brilliance of vagrant is its ability to be so portable. When you have a project you work with other developers, creating and destroying the identical dev environment is very simple, reading a local vagrant instruction file. Once created, starting this environment is as simple as typing one command.
+The brilliance of vagrant is its ability to be so portable. When you have a project you work with other developers, creating and destroying the identical dev environment is very simple, by reading a local vagrant instruction file. Once created, starting this environment is as simple as typing one command.
 
     vagrant up
 

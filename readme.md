@@ -184,7 +184,7 @@ Brew Cask is awesome because now that you understand what it does, you can insta
 
     brew cask install firefox firefox-developer-edition brave torbrowser slack sublime-text-dev vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc signal transmission skype virtualbox authy appcleaner vagrant docker tunnelblick iterm2 libreoffice wireguard-tools zoomus
 
-Note: Most modern browsers contain PDF readers like Adobe Reader and sometimes Flash and Java by default. Running standalone versions of each is not recommended because they are a security risk without regular maintenance and updates.
+Don't use `brew cask` install *Node.js*, we'll do that below using NVM. Also, no need to install external PDF reader, Flash player or Java apps anymore. All modern browsers load PDF files.
 
 ## Privacy
 
@@ -192,11 +192,11 @@ I think now is the time to briefly let you know that macOS communicates with rem
 
 First, I recommend you look through [PrivacyTools.io](https://www.privacytools.io/). There's a ton of valuable software and links to consume.
 
-One of the more popular network monitors and script blockers is called [Little Snitch](https://www.obdev.at/products/littlesnitch/index.html). It will keep applications from reporting back stats that can compromise privacy and security.
+One of the more popular network monitors and script blockers is called [Little Snitch](https://www.obdev.at/products/littlesnitch/index.html), which I don't personally use. It will keep applications from reporting back stats that can compromise privacy and security.
 
 ## ZSH
 
-macOS 10.15 and newer come with zsh as the default shell. Install [Oh My Zsh!](http://ohmyz.sh/) for extra help and nice defaults. 
+macOS 10.15 and newer come with zsh as the default shell, replacing Bash. Install [Oh My Zsh!](http://ohmyz.sh/) for extra help and nice defaults. 
 
 ```bash
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -219,32 +219,46 @@ What's a developer without [Git](http://git-scm.com/)?
 
 **Note**: It is important to remember to add `.DS_Store` (a hidden system file that's put in folders) to your `.gitignore` files. You can take a look at this repository's [.gitignore](https://github.com/nicolashery/mac-dev-setup/blob/master/.gitignore) file for inspiration.
 
+### Git aliases
+
+Less keystrokes is better, so let's add some sensible shortcuts to a global Git config file.
+
+    touch ~/.gitconfig
+    
+Pick and choose any of these aliases to help you.
+
+    [user]
+      name   = Firstname Lastname
+      email  = you@example.com
+    [github]
+      user   = username
+    [alias]
+      a      = add
+      ca     = commit -a
+      cam    = commit -am
+      cm     = commit -m
+      s      = status
+      pom    = push origin master
+      pog    = push origin gh-pages
+      puom   = pull origin master
+      puog   = pull origin gh-pages
+      cob    = checkout -b
+      co     = checkout
+      fp     = fetch --prune --all
+      l      = log --oneline --decorate --graph
+      lall   = log --oneline --decorate --graph --all
+      ls     = log --oneline --decorate --graph --stat
+      lt     = log --graph --decorate --pretty=format:'%C(yellow)%h%Creset%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)%an%Creset'
+
+With the above aliases, I can run `git s` instead of `git status` or `git ca` instead of `git commit -a` when I have a bunch of file updates.
+
 ## Node.js
 
-For modern Javascript programming, Node.js is required. There are two ways to install Node depending on your needs.
-
-1. Install [Node.js](http://nodejs.org/) with Homebrew:
-
-    brew install node
-
-2. Install [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm/) which installs Node.js. NVM allows you to easily switch between Node versions and is useful for projects on different versions of Node.
+For modern Javascript programming, Node.js is required. Using [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm/) to install Node allows you to easily switch between Node versions and is useful for projects on different versions of Node.
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-nvm install --lts # long-term support, which is not always the latest version
 ```
-
-If you installed Homebrew, we need to add `/usr/local/share/npm/bin` to our path so that npm-installed modules with executables will have them picked up. To do so, add this line to your `~/.path` file, before the `export PATH` line:
-
-```bash
-PATH=/usr/local/share/npm/bin:$PATH
-```
-
-Open a new terminal for the `$PATH` changes to take effect.
-
-We also need to tell npm where to find the Xcode Command Line Tools, by running:
-
-    sudo xcode-select -switch /usr/bin
 
 ### nvm usage
 
@@ -255,22 +269,29 @@ When you enter a project, you can install Node using NVM.
 Restart terminal and run the final command.
 
     nvm use node
+    
+Set a default version of Node.
 
-Confirm that you are using the latest version of Node and npm.
+    nvm alias default xx.xx
 
-    node -v
-    npm -v
+Confirm that you are using the default version of Node and npm.
+
+    node -v && npm -v
 
 You can switch to another version and use it by changing to the directory where you want to use Node and run the following.
 
     nvm install xx.xx
     nvm use xx.xx
     
-Node modules are defined in a local `package.json` file inside your project. `npm install` will download external libraries and frameworks into each project's own `node_modules` folder by default. You'll never need to actually edit files in this folder, only reference them.
+Node modules are defined in a local `package.json` file inside your project. `npm install` will download external libraries and frameworks into each project's own `node_modules` folder by default. You'll never need to edit files in this folder, only reference them.
+
+Update NVM
+
+    nvm install node --reinstall-packages-from=node
 
 ## SSH
 
-Whether it's Github or directly working on servers, SSH has become imperative for modern projects. 
+Just like Git and Node, SSH is imperative.
 
 [Github has excellent instructions for setting up git and connecting it to a Github account](https://help.github.com/en/github/getting-started-with-github/set-up-git)
 
@@ -288,6 +309,10 @@ Host myssh
   IdentityFile ~/.ssh/key.pem
 ```
 
+Now just run the alias to connect.
+
+    ssh myssh
+
 ## ES6
 
 Javascript libraries such as React and Vue use modern versions of Javascript starting with ECMAScript 2015 (ES6). Browser quirks that gave rise to jQuery are less problematic because web standards are regularly implemented and iterated. Thus, a golden age of Javascript is upon us.
@@ -302,7 +327,7 @@ Since it's generally a bad idea to run Babel globally you may want to uninstall 
 
 ## Sass
 
-Install your preprocessor of choice, but I recommend using either Sass (or maybe PostCSS). They all do the same thing but Sass has the most momentum since the end of the 2010s.
+Install your preprocessor of choice, but I recommend using either Sass or PostCSS, which are functionally identical in preprocessing features but PostCSS has a lot more included like Autoprefixer.
 
     npm install -g sass
 
@@ -449,3 +474,4 @@ For privacy, I recommend disabling tracking. Inside of your `.lando.yml` file, a
 - [Web development environment setup in OSX 2015](https://www.youtube.com/watch?v=yZ9TD9bmh-M)
 - [macOS Development Environment](https://assortment.io/posts/macos-development-environment)
 - [Setting Up A New Mac](https://www.davidculley.com/setting-up-a-new-mac/)
+- [macOS Catalina: Setting up a Mac for Development](https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/)

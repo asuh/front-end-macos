@@ -184,7 +184,7 @@ Brew Cask is awesome because now that you understand what it does, you can insta
 
 Note: remember to install Cask Versions command above or Firefox Developer Edition and Sublime Text Dev will return errors.
 
-    brew cask install firefox firefox-developer-edition brave-browser tor-browser slack sublime-text-dev vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc signal transmission skype virtualbox authy appcleaner vagrant docker tunnelblick iterm2 libreoffice wireguard-tools zoomus
+    brew cask install firefox firefox-developer-edition brave-browser tor-browser slack sublime-text-dev vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc signal transmission skype virtualbox authy appcleaner vagrant docker tunnelblick iterm2 libreoffice wireguard-tools zoomus scroll-reverser
 
 Don't use `brew cask` install *Node.js*, we'll do that below using NVM. Also, no need to install external PDF reader, Flash player or Java apps anymore. All modern browsers load PDF files.
 

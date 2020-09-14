@@ -12,15 +12,15 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Homebrew](#homebrew)
 - [Homebrew Cask](#homebrew-cask)
 - [Privacy](#privacy)
+- [Sublime Text, Atom, and VSCode](#sublime-text-atom-and-vscode)
+- [Vim](#vim)
 - [ZSH](#zsh)
-- [Node.js](#nodejs)
-- [Git](#git)
 - [SSH](#ssh)
+- [Git](#git)
+- [Node.js](#nodejs)
 - [ES6](#es6)
 - [Sass](#sass)
 - [Composer](#composer)
-- [Sublime Text, Atom, and VSCode](#sublime-text-atom-and-vscode)
-- [Vim](#vim)
 - [VirtualBox](#virtualbox)
 - [Docker](#docker)
 - [Vagrant](#vagrant)
@@ -196,6 +196,90 @@ First, I recommend you look through [PrivacyTools.io](https://www.privacytools.i
 
 One of the more popular network monitors and script blockers is called [Little Snitch](https://www.obdev.at/products/littlesnitch/index.html), which I don't personally use. It will keep applications from reporting back stats that can compromise privacy and security.
 
+## Sublime Text, Atom, and VSCode
+
+The text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) user, I recommend one of three editors: [Sublime Text](https://www.sublimetext.com/), [VSCode](https://code.visualstudio.com/) or [Atom](https://atom.io/).
+
+### Sublime Text
+
+I split my time starting here, for older projects. It's a solid code editor with lots of extensibility.
+
+    brew cask install sublime-text-dev
+
+I prefer using the cutting edge [beta version of Sublime Text 3](https://sublimetext.com/3) which is usually just as stable as version 2.
+
+Sublime Text is not free, but it has an unlimited "evaluation period". The seemingly expensive $70 price tag is worth every penny. If you can afford it, I suggest you [support](https://www.sublimetext.com/buy) this awesome editor. :)
+
+After installing Sublime Text, add [Package Control](https://packagecontrol.io/installation). This is the most important addition you'll make to Sublime Text and it'll give you the power to install plugins, add-ons, themes, color schemes and more.
+
+#### Colors
+
+I recommend to change two color settings:
+
+- **Theme** (which is how the tabs, the file explorer on the left, etc. look)
+- **Color Scheme** (the colors of the code).
+
+I prefer darker themes: [Material Design Darker](https://github.com/equinusocio/material-theme) and [Seti_UI Theme](https://packagecontrol.io/packages/Seti_UI). 
+
+Go to **Tools > Command Palette** (Shift-Command-P), Highlight **Package Control: Install Package** and then search for your preferred theme, make sure it's highlighted then press Enter to install it.
+
+Then go to **Sublime Text > Preferences > Settings - User** and add the following two lines (using Seti UI) and restart Sublime:
+
+    "theme": "Seti.sublime-theme",
+    "color_scheme": "Packages/Seti_UI/Scheme/Seti.tmTheme",
+
+#### Settings
+
+Let's configure our editor a little. Go to **Sublime Text > Preferences > Settings - User** and paste this code from [my Preferences.sublime-settings file](https://gist.github.com/asuh/67586e056eba7757330f).
+
+Feel free to tweak these to your preference. When done, save the file and close it.
+
+I can also open a file with `$ subl myfile.ext` or start a new project in the current directory with `$ subl .`. Pretty cool!
+
+### Atom
+
+If you like Sublime Text but can't afford or don't want to pay for it, [Atom](https://atom.io/) is an open-source editor in the spirit of Sublime Text that has a healthy community and regular updates.
+
+The main problem for Atom as of autumn 2018 is that large files and projects noticeably slow down Atom's performance.
+
+### VSCode
+
+Here's where I split the rest of my time.
+
+Visual Studio Code found popularity at the end of the 2010s and has become a staple open-source code editor for many front-end developers. I use it both personally and professionally because of various built-in features like git support, terminal integration, live sharing your code with another developer, and a similar-to-Sublime-Text repository of great plugins. I recommend using VSCodium, as it strips away the telemetry and tracking that Github integrates into VSCode.
+
+    brew cask install vscodium
+
+There's a ton of great tutorials and articles, such as [VS Code Docs](https://code.visualstudio.com/docs/introvideos/basics) and [VS Code Can Do That?](https://vscodecandothat.com/).
+
+## Vim
+
+It is a good idea to learn [Vim](http://www.vim.org/). It is a popular open-source editor accessed using command-line shells and is often pre-installed on Unix  and Linux systems.
+
+For example, when you run a `git commit`, it will open Vim to allow you to type the commit message.
+
+I suggest you read a tutorial on Vim. Grasping the concept of the two "modes" of the editor, **Insert** (by pressing `i`) and **Normal** (by pressing `Esc` to exit Insert mode), will be the part that feels most unnatural. After that it's just remembering a few important keys.
+
+Vim's default settings aren't great, and you could spend a lot of time tweaking your configuration (the `.vimrc` file). But if you're like me and just use Vim occasionally, you'll be happy to know that [Tim Pope](https://github.com/tpope) has put together some sensible defaults to quickly get started.
+
+First, install [pathogen.vim](https://github.com/tpope/vim-pathogen) by running:
+
+    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+If you're brand new to Vim and lacking a vimrc, vim ~/.vimrc and paste in the following super-minimal example:
+
+    execute pathogen#infect()
+    syntax on
+    filetype plugin indent on
+
+And finally, install the Vim "sensible defaults" by running:
+
+    cd ~/.vim/bundle && \
+    git clone git://github.com/tpope/vim-sensible.git
+
+With that, Vim will look a lot better next time you open it!
+
 ## ZSH
 
 macOS 10.15 and newer come with zsh as the default shell, replacing Bash. Install [Oh My Zsh!](http://ohmyz.sh/) for extra help and nice defaults. 
@@ -210,6 +294,34 @@ Don't forget to customize ZSH!
 [Autosuggestions](https://github.com/zsh-users/zsh-autosuggestions) and [Syntax Highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) will improve ZSH user experience too.
 
 [Sign up and follow the videos recorded by Wes Bos](http://commandlinepoweruser.com/) to learn a ton more about ZSH and why it's so powerful. Or a [free 80 minute video on YouTube by Karl Hadwen](https://www.youtube.com/watch?v=MSPu-lYF-A8).
+
+## SSH
+
+SSH is imperative, just like git and node as you'll see.
+
+[Github has excellent instructions for setting up git and connecting it to a Github account](https://help.github.com/en/github/getting-started-with-github/set-up-git). This will help you to install the repos to your computer from Github as well as set up keys that you'll need to connect git and github.
+
+Now you can add a little shortcut to make SSHing into other boxes easier. Paste the following block of code into your SSH config file at `~/.ssh/config`, changing the variables for any hosts that you connect to.
+
+```ssh
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+```
+
+Below the above, you can add other sites as needed.
+
+```ssh
+Host myssh
+  HostName example.com
+  User user
+  IdentityFile ~/.ssh/key.pem
+```
+
+With the above code, you can now run the alias `myssh` to connect.
+
+    ssh myssh
 
 ## Git
 
@@ -291,30 +403,6 @@ Update NVM
 
     nvm install node --reinstall-packages-from=node
 
-## SSH
-
-Just like Git and Node, SSH is imperative.
-
-[Github has excellent instructions for setting up git and connecting it to a Github account](https://help.github.com/en/github/getting-started-with-github/set-up-git)
-
-Now you can add a little shortcut to make SSHing into other boxes easier. Paste the following block of code into your SSH config file at `~/.ssh/config`, changing the variables for any hosts that you connect to.
-
-```ssh
-Host *
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentityFile ~/.ssh/id_rsa
-
-Host myssh
-  HostName example.com
-  User user
-  IdentityFile ~/.ssh/key.pem
-```
-
-Now just run the alias to connect.
-
-    ssh myssh
-
 ## ES6
 
 Javascript libraries such as React and Vue use modern versions of Javascript starting with ECMAScript 2015 (ES6). Browser quirks that gave rise to jQuery are less problematic because web standards are regularly implemented and iterated. Thus, a golden age of Javascript is upon us.
@@ -342,88 +430,6 @@ PHP is still one of the most used programming languages on the web, thanks in pa
 One of the most popular PHP dependency managers is called [Composer](https://getcomposer.org/). The difference between Composer and NPM, for example, is that Composer works on a project-by-project basis, there is no global installations. So you must run and setup Composer on every new project if you want to use it.
 
 To install Composer globally, go to the [Download page](https://getcomposer.org/download/) and run the package installer.
-
-## Sublime Text, Atom, and VSCode
-
-The text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) user, I recommend one of three editors: [Sublime Text](https://www.sublimetext.com/), [VSCode](https://code.visualstudio.com/) or [Atom](https://atom.io/).
-
-### Sublime Text
-
-My preferred editor is Sublime Text 3.
-
-    brew cask install sublime-text-dev
-
-I prefer using the [beta version of Sublime Text 3](https://sublimetext.com/3) which is usually just as stable as version 2.
-
-Sublime Text is not free, but it has an unlimited "evaluation period". The seemingly expensive $70 price tag is worth every penny. If you can afford it, I suggest you [support](https://www.sublimetext.com/buy) this awesome editor. :)
-
-After installing Sublime Text, add [Package Control](https://packagecontrol.io/installation). This is the most important addition you'll make to Sublime Text and it'll give you the power to install plugins, add-ons, themes, color schemes and more.
-
-#### Colors
-
-I recommend to change two color settings:
-
-- **Theme** (which is how the tabs, the file explorer on the left, etc. look)
-- **Color Scheme** (the colors of the code).
-
-My favorite theme is [Material Design Darker](https://github.com/equinusocio/material-theme) and a close second to [Seti_UI Theme](https://packagecontrol.io/packages/Seti_UI). 
-
-Go to **Tools > Command Palette** (Shift-Command-P), Highlight **Package Control: Install Package** and then search for your preferred theme, make sure it's highlighted then press Enter to install it.
-
-Then go to **Sublime Text > Preferences > Settings - User** and add the following two lines (using Seti UI) and restart Sublime:
-
-    "theme": "Seti.sublime-theme",
-    "color_scheme": "Packages/Seti_UI/Scheme/Seti.tmTheme",
-
-#### Settings
-
-Let's configure our editor a little. Go to **Sublime Text > Preferences > Settings - User** and paste this code from [my Preferences.sublime-settings file](https://gist.github.com/asuh/67586e056eba7757330f).
-
-Feel free to tweak these to your preference. When done, save the file and close it.
-
-I can also open a file with `$ subl myfile.ext` or start a new project in the current directory with `$ subl .`. Pretty cool!
-
-### Atom
-
-If you like Sublime Text but can't afford or don't want to pay for it, [Atom](https://atom.io/) is an open-source editor in the spirit of Sublime Text that has a healthy community and regular updates.
-
-The main problem for Atom as of autumn 2018 is that large files and projects noticeably slow down Atom's performance.
-
-### VSCode
-
-Visual Studio Code found popularity at the end of the 2010s and has become a staple open-source code editor for many front-end developers. I use it both personally and professionally because of various built-in features like git support, terminal integration and a similar-to-Sublime-Text repository of great plugins. I recommend using VSCodium, as it strips away the tracking that Github integrates into VSCode.
-
-    brew cask install vscodium
-
-There's a ton of great tutorials and articles, such as [VS Code Docs](https://code.visualstudio.com/docs/introvideos/basics) and [VS Code Can Do That?](https://vscodecandothat.com/).
-
-## Vim
-
-It is a good idea to learn some very basic usage of [Vim](http://www.vim.org/). It is a very popular open-source editor accessed using command-line shells and is usually pre-installed on Unix systems.
-
-For example, when you run a `git commit`, it will open Vim to allow you to type the commit message.
-
-I suggest you read a tutorial on Vim. Grasping the concept of the two "modes" of the editor, **Insert** (by pressing `i`) and **Normal** (by pressing `Esc` to exit Insert mode), will be the part that feels most unnatural. After that it's just remembering a few important keys.
-
-Vim's default settings aren't great, and you could spend a lot of time tweaking your configuration (the `.vimrc` file). But if you're like me and just use Vim occasionally, you'll be happy to know that [Tim Pope](https://github.com/tpope) has put together some sensible defaults to quickly get started.
-
-First, install [pathogen.vim](https://github.com/tpope/vim-pathogen) by running:
-
-    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
-If you're brand new to Vim and lacking a vimrc, vim ~/.vimrc and paste in the following super-minimal example:
-
-    execute pathogen#infect()
-    syntax on
-    filetype plugin indent on
-
-And finally, install the Vim "sensible defaults" by running:
-
-    cd ~/.vim/bundle && \
-    git clone git://github.com/tpope/vim-sensible.git
-
-With that, Vim will look a lot better next time you open it!
 
 ## Virtualbox
 

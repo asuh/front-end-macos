@@ -170,19 +170,21 @@ brew list --versions # check installed packages and versions
 Homebrew Cask extends Homebrew to let you install applications and large binaries. Use it to install macOS software like browsers, editors and tools.
 
 ```bash
-brew tap caskroom/cask # for modern software
-brew tap homebrew/cask-versions # archived and beta/alpha software
+brew tap caskroom/cask # added by default, for modern software
+brew tap homebrew/cask-versions # optional, run to install archived and beta/alpha software like Firefox Developer Edition
 ```
 
-Let's test this by installing Firefox.
+You can test this by installing Firefox, or skip this and install everything at once below.
 
     brew cask install firefox
 
 ### Installing multiple applications
 
-Brew Cask is awesome because now that you understand what it does, you can install all your favorite apps in one command! Here's a list of my favorite apps, including Google Chrome, that I need for development on a regular basis (requires both cask commands above).
+Brew Cask is awesome because now that you understand what it does, you can install all your favorite apps in one command! Here's a list of my favorite apps, including Google Chrome, that I need for development on a regular basis.
 
-    brew cask install firefox firefox-developer-edition brave torbrowser slack sublime-text-dev vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc signal transmission skype virtualbox authy appcleaner vagrant docker tunnelblick iterm2 libreoffice wireguard-tools zoomus
+Note: remember to install Cask Versions command above or Firefox Developer Edition and Sublime Text Dev will return errors.
+
+    brew cask install firefox firefox-developer-edition brave-browser tor-browser slack sublime-text-dev vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc signal transmission skype virtualbox authy appcleaner vagrant docker tunnelblick iterm2 libreoffice wireguard-tools zoomus
 
 Don't use `brew cask` install *Node.js*, we'll do that below using NVM. Also, no need to install external PDF reader, Flash player or Java apps anymore. All modern browsers load PDF files.
 

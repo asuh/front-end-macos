@@ -132,6 +132,11 @@ Using Terminal, install the Xcode Command Line Tools:
 
     xcode-select --install
 
+There's not a straightforward way to update Xcode Command Line Tools, so we have to remove the existing tools to reinstall from scratch.
+
+    sudo rm -rf /Library/Developer/CommandLineTools
+    xcode-select --install
+
 ### Older OSes
 Go to [http://developer.apple.com/downloads](http://developer.apple.com/downloads), and sign in with your Apple ID (the same one you use for iTunes and app purchases).
 

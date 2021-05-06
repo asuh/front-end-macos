@@ -90,14 +90,6 @@ defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
 ```
 
-### Prevent Time Machine from Prompting to Use New Hard Drives as Backup Volume
-
-I don’t use Time Machine. It is better than nothing but not necessary. But keep this on if you have an external drive you use for backups.
-
-```bash
-sudo defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-```
-
 ### Show All File Extensions
 
 ```bash

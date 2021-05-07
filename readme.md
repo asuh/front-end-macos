@@ -10,7 +10,6 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Projects Directory](#projects-directory)
 - [Xcode Command Line Tools](#xcode-command-line-tools)
 - [Homebrew](#homebrew)
-- [Homebrew Cask](#homebrew-cask)
 - [Privacy](#privacy)
 - [Sublime Text, Atom, and VSCode](#sublime-text-atom-and-vscode)
 - [Vim](#vim)
@@ -18,8 +17,6 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [SSH](#ssh)
 - [Git](#git)
 - [Node.js](#nodejs)
-- [ES6](#es6)
-- [Sass](#sass)
 - [Composer](#composer)
 - [VirtualBox](#virtualbox)
 - [Docker](#docker)
@@ -77,6 +74,16 @@ Apple's default system settings are limiting and don't show a lot of information
     
 Alternatively, open Finder, press `⇧⌘H`, `⌘2`, `⌘J` and check “Show Library Folder”. Unhiding this folder could be useful for manual backup, but it's not necessary.
 
+### Set fast keyboard key repeat rate
+```bash
+defaults write NSGlobalDomain KeyRepeat -int 0
+```
+
+### Show filename extensions by default
+```bash
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+```
+
 ### Show Path Bar and Status Bar in Finder
 
 ```bash
@@ -108,7 +115,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 If you don't already have one, create a projects directory somewhere on your machine. I like to use `~/Sites/project-name`. I prefer my Sites folder to exist with the rest of my user profile folders.
 
 ```bash
-cd / # Go to home directory
+cd # Go to home directory
 mkdir -p ~/Sites
 ```
 
@@ -162,28 +169,13 @@ brew upgrade <formula> # upgrade package to latest version
 brew list --versions # check installed packages and versions
 ```
 
-## Homebrew Cask
-
-Homebrew Cask extends Homebrew to let you install applications and large binaries. Use it to install macOS software like browsers, editors and tools.
-
-```bash
-brew tap caskroom/cask # added by default, for modern software
-brew tap homebrew/cask-versions # optional, run to install archived and beta/alpha software like Firefox Developer Edition
-```
-
-You can test this by installing Firefox, or skip this and install everything at once below.
-
-    brew cask install firefox
-
 ### Installing multiple applications
 
-Brew Cask is awesome because now that you understand what it does, you can install all your favorite apps in one command! Here's a list of my favorite apps, including Google Chrome, that I need for development on a regular basis.
+Here's a list of my favorite apps that I need for development on a regular basis.
 
-Note: remember to install Cask Versions command above or Firefox Developer Edition and Sublime Text Dev will return errors.
+    brew install firefox brave-browser tor-browser slack vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc vnc-viewer signal transmission skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn freetube iterm2 libreoffice wireguard-tools zoomus scroll-reverser homebrew/cask/docker
 
-    brew cask install firefox firefox-developer-edition brave-browser tor-browser slack sublime-text-dev vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc signal transmission skype virtualbox authy appcleaner vagrant docker tunnelblick iterm2 libreoffice wireguard-tools zoomus scroll-reverser
-
-Don't use `brew cask` install *Node.js*, we'll do that below using NVM. Also, no need to install external PDF reader, Flash player or Java apps anymore. All modern browsers load PDF files.
+Don't use `brew` install *Node.js*, we'll do that below using `nvm`.
 
 ## Privacy
 
@@ -201,9 +193,9 @@ The text editor is a developer's most important tool. Everyone has their prefere
 
 I split my time starting here, for older projects. It's a solid code editor with lots of extensibility.
 
-    brew cask install sublime-text-dev
+    brew install sublime-text-dev
 
-I prefer using the cutting edge [beta version of Sublime Text 3](https://sublimetext.com/3) which is usually just as stable as version 2.
+I prefer using the [alpha version of Sublime Text 4](https://sublimetext.com/) which is just as stable as version 2 and 3. I had to join the discord channel to find a link to download version 4.
 
 Sublime Text is not free, but it has an unlimited "evaluation period". The seemingly expensive $70 price tag is worth every penny. If you can afford it, I suggest you [support](https://www.sublimetext.com/buy) this awesome editor. :)
 
@@ -245,7 +237,7 @@ Here's where I split the rest of my time.
 
 Visual Studio Code found popularity at the end of the 2010s and has become a staple open-source code editor for many front-end developers. I use it both personally and professionally because of various built-in features like git support, terminal integration, live sharing your code with another developer, and a similar-to-Sublime-Text repository of great plugins. I recommend using VSCodium, as it strips away the telemetry and tracking that Github integrates into VSCode.
 
-    brew cask install vscodium
+    brew install vscodium
 
 There's a ton of great tutorials and articles, such as [VS Code Docs](https://code.visualstudio.com/docs/introvideos/basics) and [VS Code Can Do That?](https://vscodecandothat.com/).
 
@@ -400,27 +392,7 @@ Update NVM
 
     nvm install node --reinstall-packages-from=node
 
-## ES6
-
-Javascript libraries such as React and Vue use modern versions of Javascript starting with ECMAScript 2015 (ES6). Browser quirks that gave rise to jQuery are less problematic because web standards are regularly implemented and iterated. Thus, a golden age of Javascript is upon us.
-
-Until browsers catch up implementing the newest features of ES6, it is recommended to use a transpiler to convert your unsupported ES6 back to ES5, which is universally supported in all modern browsers.
-
-The most popular transpiler is Babel(https://babeljs.io/). Only install this locally into an already created project if you need ES5 support. Check your project, it might already use Babel and you can skip this step.
-
-    npm install --save-dev babel-cli babel-preset-env
-
-Since it's generally a bad idea to run Babel globally you may want to uninstall the global copy by running `npm uninstall --global babel-cli`
-
-## Sass
-
-Install your preprocessor of choice, but I recommend using either Sass or PostCSS, which are functionally identical in preprocessing features but PostCSS has a lot more included like Autoprefixer.
-
-    npm install -g sass
-
-Keep in mind that the utility that Sass offers is slowly being complimented and deprecated with the rise of [CSS variables](https://www.freecodecamp.org/news/everything-you-need-to-know-about-css-variables-c74d922ea855/).
-
-## PHP and Composer
+## Composer
 
 PHP is still one of the most used programming languages on the web, thanks in part to the amount of sites still using WordPress. We need a way to manage PHP scripts and packages similarly to how we manage JS dependencies using NPM.
 
@@ -438,7 +410,7 @@ There are several ways to setup a local development environment, whether it's [u
 
 The free, open-source alternative that I've been enjoying is called [Virtualbox](https://www.virtualbox.org/). This gives you a basic but very capable virtual machine host for any operating system that supports virtual installations.
 
-    brew cask install virtualbox
+    brew install virtualbox
 
 Once installed, you can easily install many [versions of Internet Explorer from the Microsoft's VM site](https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/).
 
@@ -446,7 +418,7 @@ Once installed, you can easily install many [versions of Internet Explorer from 
 
 I have personally tried to move away from MAMP for my dev environment. The alternative I like is called [Vagrant](https://www.vagrantup.com/). It gives you a powerful way to create a virtual and portable dev environment! It also has built-in connection to your local OS so that you develop in macOS but the environment runs in the VM.
 
-    brew cask install vagrant
+    brew install vagrant
 
 The brilliance of vagrant is its ability to be so portable. When you have a project you work with other developers, creating and destroying the identical dev environment is very simple, by reading a local vagrant instruction file. Once created, starting this environment is as simple as typing one command.
 
@@ -458,11 +430,11 @@ A great box to use for new projects is called [Scotch Box](https://box.scotch.io
 
 Similar to Vagrant, I increasingly use Docker for professional projects. It comes with similar benefits to Vagrant, such as portability, encapsulation for the environment within the OS, and consistent environments. Docker goes a little further because it's a container manager it's lighter in resources and file size than Vagrant.
 
-    brew cask install docker
+    brew install docker
     
 Docker can be quite powerful but complicated to set up. For this reason, I'm a fan of another project which is a wrapper around Docker called [Lando](https://lando.dev/). Originally designed for Drupal, it's increased support for many other environments including WordPress, Node.js, and Laravel.
 
-    brew cask install lando
+    brew install lando
     
 For privacy, I recommend disabling tracking. Inside of your `.lando.yml` file, add the following:
 

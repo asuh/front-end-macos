@@ -40,7 +40,7 @@ Step One - Update the system!
 **Apple Icon > System Preferences > Software Updates**
 
 Step Two - Turn on FileValut
-**Apple Icon > System Preferences > Privacy & Security > FileVault**
+**Apple Icon > System Preferences > Security & Privacy > FileVault**
 
 Click on the lock (bottom-left of window) to allow you to turn on and enable FileVault. On a brand new machine or macOS installation, it should take around an hour or less to get this done depending on the size of your drive.
 
@@ -360,7 +360,7 @@ With the above aliases, I can run `git s` instead of `git status` or `git ca` in
 For modern Javascript programming, Node.js is required. Using [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm/) to install Node allows you to easily switch between Node versions and is useful for projects on different versions of Node.
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 ```
 
 ### nvm usage

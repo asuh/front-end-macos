@@ -470,7 +470,9 @@ A great box to use for new projects is called [Scotch Box](https://box.scotch.io
 
 Similar to Vagrant, I increasingly use Docker for professional projects. It comes with similar benefits to Vagrant, such as portability, encapsulation for the environment within the OS, and consistent environments. Docker goes a little further because it's a container manager it's lighter in resources and file size than Vagrant.
 
-    brew install docker
+In order to install the desktop application (which I recommend), we have to use the full homebrew path to docker desktop.
+
+    brew install homebrew/cask/docker
     
 Docker can be quite powerful but complicated to set up. For this reason, I'm a fan of another project which is a wrapper around Docker called [Lando](https://lando.dev/). Originally designed for Drupal, it's increased support for many other environments including WordPress, Node.js, and Laravel.
 

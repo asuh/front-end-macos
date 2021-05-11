@@ -17,6 +17,8 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [SSH](#ssh)
 - [Git](#git)
 - [Node.js](#nodejs)
+- [Python](#python)
+- [Ansible](#ansible)
 - [Composer](#composer)
 - [VirtualBox](#virtualbox)
 - [Docker](#docker)
@@ -173,7 +175,7 @@ brew list --versions # check installed packages and versions
 
 Here's a list of my favorite apps that I need for development on a regular basis.
 
-    brew install firefox brave-browser tor-browser slack vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc vnc-viewer signal transmission skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn freetube iterm2 libreoffice wireguard-tools zoom scroll-reverser homebrew/cask/docker
+    brew install firefox brave-browser tor-browser slack vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc vnc-viewer signal transmission skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn freetube iterm2 libreoffice wireguard-tools zoom scroll-reverser python homebrew/cask/docker
 
 Don't use `brew` install *Node.js*, we'll do that below using `nvm`.
 
@@ -392,6 +394,44 @@ Update NVM
 
     nvm install node --reinstall-packages-from=node
 
+## Python
+
+Even if you don't use Python in your day to day, it's likely you'll encounter something that requires it. MacOS includes Python 2.x by default. Version 2 is years outdated and almost all python can and should run with a minimum of version 3. Let's update python!
+
+If you didn't already install it with `brew` above, install the latest python with Homebrew.
+
+    brew install python
+
+Now see what we installed
+
+    ls -l /usr/local/bin/python*
+
+You'll now see a few lines like this:
+
+    lrwxr-xr-x  1 user  admin  40 Jan 01 00:00 /usr/local/bin/python3.9 -> ../Cellar/python@3.9/3.9.5/bin/python3.9
+
+We'll use one of these lines to update the symlink so that using your terminal to run `python` will run the latest version by default.
+
+    ln -s -f /usr/local/bin/python3.9 /usr/local/bin/python
+
+Check it out.
+
+    python --version
+
+### Pip
+
+With `python` now running the latest version, it's a good idea to install Pip, which is a package manager for Python.
+
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python get-pip.py --user
+
+
+## Ansible
+
+If you're working with virtual machines or remote servers, it's possible you'll need a way to automate/manage tasks on/with them. Ansible is your answer to this.
+
+    python -m pip install --user ansible
+
 ## Composer
 
 PHP is still one of the most used programming languages on the web, thanks in part to the amount of sites still using WordPress. We need a way to manage PHP scripts and packages similarly to how we manage JS dependencies using NPM.
@@ -452,3 +492,4 @@ For privacy, I recommend disabling tracking. Inside of your `.lando.yml` file, a
 - [macOS Development Environment](https://assortment.io/posts/macos-development-environment)
 - [Setting Up A New Mac](https://www.davidculley.com/setting-up-a-new-mac/)
 - [macOS Catalina: Setting up a Mac for Development](https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/)
+- [How to set Python3 as a default python version on MacOS?](https://dev.to/malwarebo/how-to-set-python3-as-a-default-python-version-on-mac-4jjf)

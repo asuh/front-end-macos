@@ -175,7 +175,7 @@ brew list --versions # check installed packages and versions
 
 Here's a list of my favorite apps that I need for development on a regular basis.
 
-    brew install firefox brave-browser tor-browser slack vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc vnc-viewer signal transmission skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn freetube iterm2 libreoffice wireguard-tools zoom scroll-reverser python homebrew/cask/docker
+    brew install firefox brave-browser tor-browser slack vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc vnc-viewer signal transmission skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn freetube iterm2 kap libreoffice wireguard-tools zoom scroll-reverser python homebrew/cask/docker
 
 Don't use `brew` install *Node.js*, we'll do that below using `nvm`.
 

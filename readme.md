@@ -69,6 +69,7 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 ## System Tweaks
 
 Apple's default system settings are limiting and don't show a lot of information. Let's change the settings for better usability around the system.
+Note: keep in mind you probably have to re-open Finder or Terminal to see these changes
 
 ### Unhide the Library folder
 
@@ -175,7 +176,7 @@ brew list --versions # check installed packages and versions
 
 Here's a list of my favorite apps that I need for development on a regular basis.
 
-    brew install firefox brave-browser tor-browser slack vscodium atom sourcetree imageoptim imagealpha google-nik-collection vlc vnc-viewer signal transmission skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn freetube iterm2 kap libreoffice wireguard-tools zoom scroll-reverser python homebrew/cask/docker
+    brew install firefox brave-browser tor-browser slack vscodium atom imageoptim imagealpha google-nik-collection vlc vnc-viewer signal transmission skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn freetube iterm2 kap libreoffice wireguard-tools zoom scroll-reverser python homebrew/cask/docker
 
 Don't use `brew` install *Node.js*, we'll do that below using `nvm`.
 
@@ -414,7 +415,7 @@ We'll use one of these lines to update the symlink so that using your terminal t
 
     ln -s -f /usr/local/bin/python3.9 /usr/local/bin/python
 
-Check it out.
+Check it out. (you'll have to restart terminal)
 
     python --version
 

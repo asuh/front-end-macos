@@ -485,8 +485,10 @@ For privacy, I recommend disabling tracking. Inside of your `.lando.yml` file, a
       - report: false
         url: https://metrics.lando.dev
 
-## TODO
-- Allow apps downloaded from anywhere system preferences
+
+## Video walk-through
+If you like to watch and see by example, some of what I've covered (and more) is in a video that swyx.io-fame Shawn made. I don't agree with or recommend everything he does, but I think much of it is good to see in real time.
+https://www.swyx.io/new-mac-setup-2021/
 
 ## Credits
 

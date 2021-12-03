@@ -8,8 +8,8 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [System update and Disk Encryption](#system-update-and-disk-encryption)
 - [System tweaks](#system-tweaks)
 - [Projects Directory](#projects-directory)
-- [Xcode Command Line Tools](#xcode-command-line-tools)
 - [Homebrew](#homebrew)
+- [Xcode Command Line Tools](#xcode-command-line-tools)
 - [Privacy](#privacy)
 - [Sublime Text, Atom, and VSCode](#sublime-text-atom-and-vscode)
 - [Vim](#vim)
@@ -124,26 +124,6 @@ mkdir -p ~/Sites
 
 Depending on the type of projects you work on, this might not be necessary or preferable.
 
-## Xcode Command Line Tools
-
-An optional but nice-to-have add-on is **Command Line Tools** for **Xcode**. These include compilers that will allow you to build things from source.
-
-Xcode weighs something ~2GB and is useful for the iOS simulator but is not necessary unless you're developing iOS or Mac apps. Good news is Apple provides a way to install only the Command Line Tools, without Xcode.
-
-Using Terminal, install the Xcode Command Line Tools:
-
-    xcode-select --install
-
-There's not a straightforward way to update Xcode Command Line Tools, so we have to remove the existing tools to reinstall from scratch.
-
-    sudo rm -rf /Library/Developer/CommandLineTools
-    xcode-select --install
-
-### Older OSes
-Go to [http://developer.apple.com/downloads](http://developer.apple.com/downloads), and sign in with your Apple ID (the same one you use for iTunes and app purchases).
-
-Once you reach the downloads page, search for "command line tools", and download **Command Line Tools for Xcode**. Open the **.dmg** file once it's done downloading, and double-click on the **.mpkg** installer to launch the installation. When it's done, you can unmount the disk in Finder.
-
 ## Homebrew
 
 Package managers make it so much easier to install and update applications (for Operating Systems) or libraries (for programming languages). The most popular one for OS X is [Homebrew](http://brew.sh/).
@@ -174,11 +154,33 @@ brew list --versions # check installed packages and versions
 
 ### Installing multiple applications
 
-Here's a list of my favorite apps that I need for development on a regular basis.
+Here's a list of my favorite apps that I need for development on a regular basis (modify the list below as you need)
 
-    brew install firefox brave-browser tor-browser slack vscodium atom imageoptim imagealpha google-nik-collection vlc vnc-viewer signal transmission skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn freetube iterm2 kap libreoffice wireguard-tools zoom scroll-reverser python homebrew/cask/docker
+    brew install firefox brave-browser tor-browser slack visual-studio-code vscodium atom imageoptim imagealpha google-nik-collection vlc vnc-viewer signal transmission skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn iterm2 kap libreoffice wireguard-tools zoom scroll-reverser python homebrew/cask/docker
 
-Don't use `brew` install *Node.js*, we'll do that below using `nvm`.
+Don't use `brew` to install *Node.js*, we'll do that below using `nvm`.
+
+## Xcode Command Line Tools
+
+An optional but nice-to-have add-on is **Command Line Tools** for **Xcode**. These include compilers that will allow you to build things from source.
+
+Note: if you already installed Homebrew above, it's likely that Xcode was installed for you so you can skip this section.
+
+Xcode weighs something ~2GB and is useful for the iOS simulator but is not necessary unless you're developing iOS or Mac apps. Good news is Apple provides a way to install only the Command Line Tools, without Xcode.
+
+Using Terminal, install the Xcode Command Line Tools:
+
+    xcode-select --install
+
+There's not a straightforward way to update Xcode Command Line Tools, so we have to remove the existing tools to reinstall from scratch.
+
+    sudo rm -rf /Library/Developer/CommandLineTools
+    xcode-select --install
+
+### Older OSes
+Go to [http://developer.apple.com/downloads](http://developer.apple.com/downloads), and sign in with your Apple ID (the same one you use for iTunes and app purchases).
+
+Once you reach the downloads page, search for "command line tools", and download **Command Line Tools for Xcode**. Open the **.dmg** file once it's done downloading, and double-click on the **.mpkg** installer to launch the installation. When it's done, you can unmount the disk in Finder.
 
 ## Privacy
 
@@ -238,7 +240,11 @@ The main problem for Atom as of autumn 2018 is that large files and projects not
 
 Here's where I split the rest of my time.
 
-Visual Studio Code found popularity at the end of the 2010s and has become a staple open-source code editor for many front-end developers. I use it both personally and professionally because of various built-in features like git support, terminal integration, live sharing your code with another developer, and a similar-to-Sublime-Text repository of great plugins. I recommend using VSCodium, as it strips away the telemetry and tracking that Github integrates into VSCode.
+Visual Studio Code found popularity at the end of the 2010s and has become a staple open-source code editor for many front-end developers. I use it both personally and professionally because of various built-in features like git support, terminal integration, live sharing your code with another developer, and a similar-to-Sublime-Text repository of great plugins. 
+
+    brew install visual-studio-code
+
+I recommend using VSCodium, as it strips away the telemetry and tracking that Github integrates into VSCode. However, [VSCodium has issues with extensions](https://github.com/VSCodium/vscodium/wiki/Extensions-Compatibility) like Live Share, so keep that in mind.
 
     brew install vscodium
 

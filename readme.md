@@ -9,7 +9,6 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [System tweaks](#system-tweaks)
 - [Projects Directory](#projects-directory)
 - [Homebrew](#homebrew)
-- [Xcode Command Line Tools](#xcode-command-line-tools)
 - [Privacy](#privacy)
 - [Sublime Text, Atom, and VSCode](#sublime-text-atom-and-vscode)
 - [Vim](#vim)
@@ -160,7 +159,7 @@ Here's a list of my favorite apps that I need for development on a regular basis
 
 Don't use `brew` to install *Node.js*, we'll do that below using `nvm`.
 
-## Xcode Command Line Tools
+### Xcode Command Line Tools
 
 An optional but nice-to-have add-on is **Command Line Tools** for **Xcode**. These include compilers that will allow you to build things from source.
 
@@ -400,6 +399,36 @@ Node modules are defined in a local `package.json` file inside your project. `np
 Update NVM
 
     nvm install node --reinstall-packages-from=node
+
+### Auto invoke NPM
+
+Automating NPM to switch to the right Node is a nice little time saver. [Add some code to your shell to allow this auto switch capability](https://github.com/nvm-sh/nvm#deeper-shell-integration).
+
+Put this into your $HOME/.zshrc (using latest MacOS):
+
+```bash
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+```
 
 ## Python
 

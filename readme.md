@@ -127,9 +127,11 @@ Depending on the type of projects you work on, this might not be necessary or pr
 
 Package managers make it so much easier to install and update applications (for Operating Systems) or libraries (for programming languages). The most popular one for OS X is [Homebrew](http://brew.sh/).
 
+(If you're using an M1 Mac in 2022, you'll probably have issues with installation. There are multiple articles to help you add commands to the system path and then you can run `brew doctor` to find more advice)
+
 ### Install
 
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 Run the following command to make sure everything works:
 
@@ -531,5 +533,5 @@ https://www.swyx.io/new-mac-setup-2021/
 - [Web development environment setup in OSX 2015](https://www.youtube.com/watch?v=yZ9TD9bmh-M)
 - [macOS Development Environment](https://assortment.io/posts/macos-development-environment)
 - [Setting Up A New Mac](https://www.davidculley.com/setting-up-a-new-mac/)
-- [macOS Catalina: Setting up a Mac for Development](https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/)
+- [macOS Monterey: Setting up a Mac for Development](https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/)
 - [How to set Python3 as a default python version on MacOS?](https://dev.to/malwarebo/how-to-set-python3-as-a-default-python-version-on-mac-4jjf)

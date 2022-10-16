@@ -10,7 +10,7 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Projects Directory](#projects-directory)
 - [Homebrew](#homebrew)
 - [Privacy](#privacy)
-- [Sublime Text, Atom, and VSCode](#sublime-text-atom-and-vscode)
+- [Sublime Text and VSCode](#sublime-text-and-vscode)
 - [Vim](#vim)
 - [ZSH](#zsh)
 - [SSH](#ssh)
@@ -31,9 +31,9 @@ Throughout this document, you will encounter examples like this that contain one
 sudo command -flag --flag directory file.extention # Comments are behind pound signs
 ```
 
-Anytime you see this, it is referring to your CLI of choice, whether it's the built-in Terminal.app or a third-party application like [iTerm2](https://iterm2.com/).
+Anytime you see this, it is referring to your CLI of choice, whether it's the built-in Terminal.app or a third-party terminal like [iTerm2](https://iterm2.com/).
 
-Front-end development has increasingly moved towards an open-source driven, command-line interface (CLI) dependent workflow. Whether we access modules, packages or simply useful commands, setting up a command-line shell to your liking is a good idea.
+Front-end development has increasingly moved towards an open-source driven, command-line interface (CLI) dependent workflow. Setting up a command-line shell to your liking is a good idea.
 
 ## System update and Disk Encryption
 
@@ -43,23 +43,27 @@ Step One - Update the system!
 Step Two - Turn on FileValut
 **Apple Icon > System Preferences > Security & Privacy > FileVault**
 
-Click on the lock (bottom-left of window) to allow you to turn on and enable FileVault. On a brand new machine or macOS installation, it should take around an hour or less to get this done depending on the size of your drive.
+On a brand new machine or macOS installation, it shouldn't take long depending on the size of your drive.
 
 Alternatively, you can use a third-party encryption software like [Veracrypt](https://en.wikipedia.org/wiki/VeraCrypt/), which is open-source and well regarded in the security community.
 
-### Enable FileVault Encryption
+### Why Enable FileVault Encryption
 
 Why do you want [full-disk encryption](https://en.wikipedia.org/wiki/Disk_encryption)? Theft.
 
-You're most likely using a portable laptop of some kind. If you lose it, the laptop gets stolen or someone tries to hack into it, your personal data is at risk. Using full-disk encryption is an extra layer of security to keep your mind at ease in case of potential intrusion.
+You're most likely using a portable device of some kind. If you lose it, the laptop gets stolen or someone tries to hack into it, your personal data is at risk. Using full-disk encryption is an extra layer of security to keep your mind at ease in case of potential intrusion.
 
 Two main caveats:
-- **Do not misplace or forget your FileVault recovery key or login password**. Losing this password means you cannot log in and without the recovery key everything on your computer is inaccessible if you can't decrypt the files during a recovery. iCloud is an option to store the Filevault password. Using iCloud, Apple Support will be able to assist you with recovering data. iCloud isn't fully encrypted so whilt it's convenient, it's less secure.
-- If macOS gets corrupted and you need to download files from the drive after accessing the drive from an external case, it's not possible without the password and recovery key. Make sure you're both backing up using [Time Machine](https://support.apple.com/en-us/HT201250) on an external drive or a NAS, and a cloud backup provider like [Backblaze](https://www.backblaze.com/), [Carbonite](https://carbonite.com/), or [iDrive](https://www.idrive.com).
+- **Do not misplace or forget your FileVault recovery key or login password**. Losing this password means you cannot log in and without the recovery key everything on your computer is inaccessible if you can't decrypt the files during a recovery. iCloud is one option to store the Filevault password. The other option is downloading it and storing it yourself. Using iCloud, Apple Support will be able to assist you with recovering data. On Apple's servers, iCloud isn't fully encrypted. So, while iCloud is convenient, it's less secure.
+- If macOS gets corrupted and you need to download files from the drive after accessing the drive from an external case, it's not possible without the laptop password and FileVault recovery key. Make sure you're both backing up using [Time Machine](https://support.apple.com/en-us/HT201250) on an external drive or a NAS, and a cloud backup provider like [Backblaze](https://www.backblaze.com/).
 
 ### Enable Firewall
 
 This is for online protection when you're not in your home network or not behind a router.
+
+**Apple Icon > System Preferences > Security & Privacy > Firewall**
+
+or 
 
 ```bash
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
@@ -112,6 +116,10 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 ```
 
+Another update I prefer is to show all filename extensions in Finder. 
+
+**Finder > Preferences > Advanced > Show all filename extensions**
+
 ## Projects Directory
 
 If you don't already have one, create a projects directory somewhere on your machine. I like to use `~/Sites/project-name`. I prefer my Sites folder to exist with the rest of my user profile folders.
@@ -125,7 +133,7 @@ Depending on the type of projects you work on, this might not be necessary or pr
 
 ## Homebrew
 
-Package managers make it so much easier to install and update applications (for Operating Systems) or libraries (for programming languages). The most popular one for OS X is [Homebrew](http://brew.sh/).
+Package managers make it so much easier to install and update applications (for Operating Systems) or libraries (for programming languages). The most popular one for macOS is [Homebrew](http://brew.sh/).
 
 (If you're using an M1 Mac in 2022, you'll probably have issues with installation. There are multiple articles to help you add commands to the system path and then you can run `brew doctor` to find more advice)
 
@@ -157,8 +165,12 @@ brew list --versions # check installed packages and versions
 
 Here's a list of my favorite apps that I need for development on a regular basis (modify the list below as you need)
 
-    brew install firefox brave-browser tor-browser slack visual-studio-code vscodium atom sequel-ace imageoptim imagealpha google-nik-collection vlc vnc-viewer signal transmission skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn iterm2 kap libreoffice wireguard-tools zoom scroll-reverser python homebrew/cask/docker
+    brew install firefox brave-browser tor-browser slack visual-studio-code vscodium sequel-ace imageoptim imagealpha vlc vnc-viewer signal skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn iterm2 kap libreoffice wireguard-tools zoom scroll-reverser homebrew/cask/docker
 
+To explicity install software applications with a GUI, it's good to use the flag `--cask`. The example below is necessary because `transmission` can default to a CLI version instead of the GUI-based app.
+
+    brew install transmission --cask
+    
 Don't use `brew` to install *Node.js*, we'll do that below using `nvm`.
 
 ### Xcode Command Line Tools
@@ -179,7 +191,7 @@ There's not a straightforward way to update Xcode Command Line Tools, so we have
     xcode-select --install
 
 ### Older OSes
-Go to [http://developer.apple.com/downloads](http://developer.apple.com/downloads), and sign in with your Apple ID (the same one you use for iTunes and app purchases).
+Go to [http://developer.apple.com/downloads](http://developer.apple.com/downloads), and sign in with your Apple ID.
 
 Once you reach the downloads page, search for "command line tools", and download **Command Line Tools for Xcode**. Open the **.dmg** file once it's done downloading, and double-click on the **.mpkg** installer to launch the installation. When it's done, you can unmount the disk in Finder.
 
@@ -187,13 +199,13 @@ Once you reach the downloads page, search for "command line tools", and download
 
 I think now is the time to briefly let you know that macOS communicates with remove Apple services by default. Apple collects data on how you use the operating system through a process called [Differential Privacy](https://www.wired.com/2016/06/apples-differential-privacy-collecting-data/). With this process, Apple know how many people or devices use what and how often. Apple also knows about their user’s habits as a collective, not individuals. [There's not a lot of transparency](https://www.schneier.com/blog/archives/2016/06/apples_differen.html) about what's going on but there are many free and open source applications that help us shut down and block as many as we know about.
 
-First, I recommend you look through [PrivacyTools.io](https://www.privacytools.io/). There's a ton of valuable software and links to consume.
+First, I recommend you look through [PrivacyGuides.org](https://www.privacyguides.org/). There's a ton of valuable software and links to consume.
 
 One of the more popular network monitors and script blockers is called [Little Snitch](https://www.obdev.at/products/littlesnitch/index.html), which I don't personally use. It will keep applications from reporting back stats that can compromise privacy and security.
 
-## Sublime Text, Atom, and VSCode
+## Sublime Text and VSCode
 
-The text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) user, I recommend one of three editors: [Sublime Text](https://www.sublimetext.com/), [VSCode](https://code.visualstudio.com/) or [Atom](https://atom.io/).
+The text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) user, I recommend one of two editors: [Sublime Text](https://www.sublimetext.com/) or [VSCode](https://code.visualstudio.com/).
 
 ### Sublime Text
 
@@ -230,12 +242,6 @@ Let's configure our editor a little. Go to **Sublime Text > Preferences > Settin
 Feel free to tweak these to your preference. When done, save the file and close it.
 
 I can also open a file with `$ subl myfile.ext` or start a new project in the current directory with `$ subl .`. Pretty cool!
-
-### Atom
-
-If you like Sublime Text but can't afford or don't want to pay for it, [Atom](https://atom.io/) is an open-source editor in the spirit of Sublime Text that has a healthy community and regular updates.
-
-The main problem for Atom as of autumn 2018 is that large files and projects noticeably slow down Atom's performance.
 
 ### VSCode
 

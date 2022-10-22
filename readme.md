@@ -128,6 +128,12 @@ One very important part of using Terminal in my workflow is being able to quickl
 
 Running this command will return a long string, separated by `:`, of various paths to services you can reference using line commands. If you install one of the services like Node and typing `npm` doesn't work, for example, use the above command to check to make sure you see a reference to the path to Node.
 
+In my recent past, I've had issues with Composer's path not being set in the system path. I needed it to run Valet, which I talk about later in the document. In order to use Valet, I added Composer to the system path using the following command:
+
+    export PATH=$PATH:/Users/[username]/.composer/vendor/bin
+
+Of course, `[username]` is the name of the macOS account you're using. `echo $PATH` now includes the above path after `:` to be in the returned string.
+
 
 ## Projects Directory
 

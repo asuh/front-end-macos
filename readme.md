@@ -20,7 +20,7 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Ansible](#ansible)
 - [Composer](#composer)
 - [VirtualBox](#virtualbox)
-- [Laravel Valet](#valet)
+- [Laravel Valet](#laravel-valet)
 - [Docker](#docker)
 
 ## Command Line Interface
@@ -119,6 +119,15 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 Another update I prefer is to show all filename extensions in Finder. 
 
 **Finder > Preferences > Advanced > Show all filename extensions**
+
+### System Path
+
+One very important part of using Terminal in my workflow is being able to quickly type commands that run services. Sometimes, you might install something and it is still not available in the Terminal.
+
+    echo $PATH
+
+Running this command will return a long string, separated by `:`, of various paths to services you can reference using line commands. If you install one of the services like Node and typing `npm` doesn't work, for example, use the above command to check to make sure you see a reference to the path to Node.
+
 
 ## Projects Directory
 
@@ -376,7 +385,7 @@ With the above aliases, I can run `git s` instead of `git status` or `git ca` in
 For modern Javascript programming, Node.js is required. Using [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm/) to install Node allows you to easily switch between Node versions and is useful for projects on different versions of Node.
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 ```
 
 ### nvm usage

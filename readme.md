@@ -20,8 +20,8 @@ The following workflow assumes a clean installation of macOS. While it's okay to
 - [Ansible](#ansible)
 - [Composer](#composer)
 - [VirtualBox](#virtualbox)
+- [Laravel Valet](#valet)
 - [Docker](#docker)
-- [Vagrant](#vagrant)
 
 ## Command Line Interface
 
@@ -486,35 +486,29 @@ To install Composer globally, go to the [Download page](https://getcomposer.org/
 
 ## Virtualbox
 
-The traditional way of setting up a front-end development environment used to be to work through FTP or directly on the server. WordPress installations still promote this workflow to some extent.
+There are several ways to setup a local development environment, whether it's [using the built in *AMP stack](http://coolestguidesontheplanet.com/get-apache-mysql-php-phpmyadmin-working-osx-10-9-mavericks/), installing a package like [MAMP](https://www.mamp.info/en/) or [XAMPP](https://www.apachefriends.org) or using virtual machines like [Parallels](https://www.parallels.com/products/desktop/) or [VMWare Fusion](https://www.vmware.com/products/fusion.html) which give you isolated environments.
 
-The last decade has seen significant changes to the front-end workflow, one of the most important being a local development environment: a local database, a local web server, and back-end language among other things. Using this environment decreases time and increases efficiency for front-end development.
-
-There are several ways to setup a local development environment, whether it's [using the built in *AMP stack](http://coolestguidesontheplanet.com/get-apache-mysql-php-phpmyadmin-working-osx-10-9-mavericks/), installing a package like [MAMP](https://www.mamp.info/en/) or [XAMPP](https://www.apachefriends.org/index.html) or using virtual machines like [Parallels](https://www.parallels.com/products/desktop/) or [VMWare Fusion](https://www.vmware.com/products/fusion/) which give you isolated environment to run the above packages.
-
-The free, open-source alternative that I've been enjoying is called [Virtualbox](https://www.virtualbox.org/). This gives you a basic but very capable virtual machine host for any operating system that supports virtual installations.
+The free, open-source alternative that I often use is called [Virtualbox](https://www.virtualbox.org/). This gives you a basic but very capable virtual machine host for any operating system that supports virtual installations.
 
     brew install virtualbox
 
-Once installed, you can easily install many [versions of Internet Explorer from the Microsoft's VM site](https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/).
+Once installed, you can easily install many [versions of Internet Explorer from the Microsoft's VM site](https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/) if you are still supporting legacy browsers in your project.
 
-## Vagrant
 
-I have personally tried to move away from MAMP for my dev environment. The alternative I like is called [Vagrant](https://www.vagrantup.com/). It gives you a powerful way to create a virtual and portable dev environment! It also has built-in connection to your local OS so that you develop in macOS but the environment runs in the VM.
+## Laravel Valet
 
-    brew install vagrant
+In theory, I prefer a completely isolated environment that's self-contained like Docker. Practically, these environments can be bloated, inefficient, and using a lot of CPU processing or Memory.
 
-The brilliance of vagrant is its ability to be so portable. When you have a project you work with other developers, creating and destroying the identical dev environment is very simple, by reading a local vagrant instruction file. Once created, starting this environment is as simple as typing one command.
+Since the late 2010s, I've grown to appreciate a project from Laravel called [Valet](https://laravel.com/docs/master/valet). Valet is free, very lightweight, and is relatively easy to set up. I pair it with [DBngin](https://dbngin.com/), a free and open-source database hosting application.
 
-    vagrant up
+These two paired together leave a small footprint and don't 
 
-A great box to use for new projects is called [Scotch Box](https://box.scotch.io/). It is fully-featured and contains everything I need built in to get started with many projects using PHP, JS or Ruby. For a WordPress environment, [Roots](https://roots.io/) has [Trellis](https://roots.io/trellis/) which includes everything you need for a powerful VM.
 
 ## Docker
 
-Similar to Vagrant, I increasingly use Docker for professional projects. It comes with similar benefits to Vagrant, such as portability, encapsulation for the environment within the OS, and consistent environments. Docker goes a little further because it's a container manager it's lighter in resources and file size than Vagrant.
+I increasingly use Docker for professional projects because of its portability and shared environment for projects with multiple developers.
 
-In order to install the desktop application (which I recommend), we have to use the full homebrew path to docker desktop.
+In order to install the desktop application, we have to use the full homebrew path to Docker desktop.
 
     brew install homebrew/cask/docker
     

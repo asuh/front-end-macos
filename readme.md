@@ -182,7 +182,7 @@ brew list --versions # check installed packages and versions
 
 Here's a list of my favorite apps that I need for development on a regular basis (modify the list below as you need)
 
-    brew install firefox brave-browser tor-browser slack visual-studio-code vscodium sequel-ace imageoptim imagealpha vlc vnc-viewer signal skype virtualbox authy appcleaner vagrant tunnelblick mullvadvpn iterm2 kap libreoffice wireguard-tools zoom scroll-reverser homebrew/cask/docker
+    brew install firefox brave-browser tor-browser slack visual-studio-code vscodium sequel-ace imageoptim vlc vnc-viewer signal virtualbox authy appcleaner tunnelblick mullvadvpn iterm2 kap libreoffice wireguard-tools zoom scroll-reverser homebrew/cask/docker
 
 To explicity install software applications with a GUI, it's good to use the flag `--cask`. The example below is necessary because `transmission` can default to a CLI version instead of the GUI-based app.
 
@@ -268,9 +268,23 @@ Visual Studio Code found popularity at the end of the 2010s and has become a sta
 
     brew install visual-studio-code
 
+Add command line `code` access:
+
+```
+cat << EOF >> ~/.zprofile
+# Add Visual Studio Code (code)
+export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+EOF
+```
+
 I recommend using VSCodium, as it strips away the telemetry and tracking that Github integrates into VSCode. However, [VSCodium has issues with extensions](https://github.com/VSCodium/vscodium/wiki/Extensions-Compatibility) like Live Share, so keep that in mind.
 
     brew install vscodium
+
+Add command line `codium` access:
+
+    Go to the command palette (View | Command Palette...)
+    Choose Shell command: Install 'codium' command in PATH.
 
 There's a ton of great tutorials and articles, such as [VS Code Docs](https://code.visualstudio.com/docs/introvideos/basics) and [VS Code Can Do That?](https://vscodecandothat.com/).
 

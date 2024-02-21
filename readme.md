@@ -2,8 +2,6 @@
 
 This document assumes you're running a fresh and updated copy of **macOS "formerly known as OS X"**.
 
-The following workflow assumes a clean installation of macOS. While it's okay to have third-party software installed, the installation process will be more streamlined and less convoluted with a new macOS.
-
 - [Command Line Interface](#command-line-interface)
 - [System update and Disk Encryption](#system-update-and-disk-encryption)
 - [System tweaks](#system-tweaks)
@@ -31,9 +29,7 @@ Throughout this document, you will encounter examples like this that contain one
 sudo command -flag --flag directory file.extention # Comments are behind pound signs
 ```
 
-Anytime you see this, it is referring to your CLI of choice, whether it's the built-in Terminal.app or a third-party terminal like [iTerm2](https://iterm2.com/).
-
-Front-end development has increasingly moved towards an open-source driven, command-line interface (CLI) dependent workflow. Setting up a command-line shell to your liking is a good idea.
+Anytime you see this, it is referring to your CLI of choice, whether it's the built-in Terminal.app or a third-party terminal like [iTerm2](https://iterm2.com/). Setting up a command-line shell to your liking is a good idea.
 
 ## System update and Disk Encryption
 
@@ -74,12 +70,6 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 Apple's default system settings are limiting and don't show a lot of information. Let's change the settings for better usability around the system.
 Note: keep in mind you probably have to re-open Finder or Terminal to see these changes
 
-### Unhide the Library folder
-
-    chflags nohidden ~/Library
-    
-Alternatively, open Finder, press `⇧⌘H`, `⌘2`, `⌘J` and check “Show Library Folder”. Unhiding this folder could be useful for manual backup, but it's not necessary.
-
 ### Set fast keyboard key repeat rate
 ```bash
 defaults write NSGlobalDomain KeyRepeat -int 0
@@ -119,6 +109,14 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 Another update I prefer is to show all filename extensions in Finder. 
 
 **Finder > Preferences > Advanced > Show all filename extensions**
+
+### Unhide the Library folder
+
+This is likely outdated now, less useful than before, but sometimes it's still helpful.
+
+    chflags nohidden ~/Library
+    
+Alternatively, open Finder, press `⇧⌘H`, `⌘2`, `⌘J` and check “Show Library Folder”. Unhiding this folder could be useful for manual backup, but it's not necessary.
 
 ### System Path
 

@@ -68,9 +68,35 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 ## System Tweaks
 
 Apple's default system settings are limiting and don't show a lot of information. Let's change the settings for better usability around the system.
-Note: keep in mind you probably have to re-open Finder or Terminal to see these changes
+
+> [!NOTE]
+> _For all CLI commands, keep in mind you probably have to either log out and log back in OR re-open Finder/Terminal to see the following changes_
+
+### Tap-to-click for the trackpad
+
+1. [**System Preference -> Trackpad -> Point & Click**]
+2. [**Tap to click**] option
+
+### Three-finger Dragging
+
+1. [**System Preference -> Accessibility**]
+2. In the [**Accessibility**] sidebar, choose [**Pointer Control**]
+3. Click the button [**Trackpad Options**]
+4. Enable dragging with [**three-finger drag**]
+
+### Expose with Trackpad
+
+1. [**System Preference -> Trackpad**]
+2. Click the [**More Gestures**]
+3. Enable "App Exposé" and select [**Swipe up with four fingers**]
 
 ### Set fast keyboard key repeat rate
+
+1. [**System Preference -> Keyboard**]
+2. Move dial to the right of [**Key Repeat**]
+
+OR
+
 ```bash
 defaults write NSGlobalDomain KeyRepeat -int 0
 ```
@@ -108,9 +134,9 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
 Another update I prefer is to show all filename extensions in Finder. 
 
-**Finder > Preferences > Advanced > Show all filename extensions**
+[**Finder > Preferences > Advanced > Show all filename extensions**]
 
-### Unhide the Library folder
+### (Optional) Unhide the Library folder
 
 This is likely outdated now, less useful than before, but sometimes it's still helpful.
 
@@ -148,7 +174,7 @@ Depending on the type of projects you work on, this might not be necessary or pr
 
 Package managers make it so much easier to install and update applications (for Operating Systems) or libraries (for programming languages). The most popular one for macOS is [Homebrew](http://brew.sh/).
 
-(If you're using an M1 Mac in 2022, you'll probably have issues with installation. There are multiple articles to help you add commands to the system path and then you can run `brew doctor` to find more advice)
+(If you're using an native `Mx` _[x = any integer]_ Mac, you'll potentially have installation issues. There are multiple articles to help you add commands to the system path and then you can run `brew doctor` to find more advice)
 
 ### Install
 
@@ -180,13 +206,16 @@ brew list --versions # check installed packages and versions
 
 Here's a list of my favorite apps that I need for development on a regular basis (modify the list below as you need)
 
-    brew install firefox brave-browser tor-browser slack visual-studio-code vscodium sequel-ace imageoptim vlc vnc-viewer signal virtualbox authy appcleaner tunnelblick mullvadvpn iterm2 kap libreoffice wireguard-tools zoom scroll-reverser homebrew/cask/docker
+    brew install firefox brave-browser tor-browser mullvad-browser slack visual-studio-code vscodium sequel-ace imageoptim vlc vnc-viewer signal virtualbox appcleaner mullvadvpn iterm2 kap libreoffice wireguard-tools zoom qbittorrent scroll-reverser homebrew/cask/docker
+
+    brew install --cask zed arc transmission
 
 To explicity install software applications with a GUI, it's good to use the flag `--cask`. The example below is necessary because `transmission` can default to a CLI version instead of the GUI-based app.
 
     brew install transmission --cask
     
-Don't use `brew` to install *Node.js*, we'll do that below using `nvm`.
+> [!NOTE]
+> _Don't use `brew` to install *Node.js*, we'll do that below using `nvm`_
 
 ### Xcode Command Line Tools
 
@@ -204,11 +233,6 @@ There's not a straightforward way to update Xcode Command Line Tools, so we have
 
     sudo rm -rf /Library/Developer/CommandLineTools
     xcode-select --install
-
-### Older OSes
-Go to [http://developer.apple.com/downloads](http://developer.apple.com/downloads), and sign in with your Apple ID.
-
-Once you reach the downloads page, search for "command line tools", and download **Command Line Tools for Xcode**. Open the **.dmg** file once it's done downloading, and double-click on the **.mpkg** installer to launch the installation. When it's done, you can unmount the disk in Finder.
 
 ## Privacy
 
@@ -564,3 +588,4 @@ https://www.swyx.io/new-mac-setup-2021/
 - [Setting Up A New Mac](https://www.davidculley.com/setting-up-a-new-mac/)
 - [macOS Monterey: Setting up a Mac for Development](https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/)
 - [How to set Python3 as a default python version on MacOS?](https://dev.to/malwarebo/how-to-set-python3-as-a-default-python-version-on-mac-4jjf)
+- [Macbook Setup Guide For Web Programmers](https://github.com/maoxiaoke/setup-a-mac-for-frontend-dev)

@@ -132,6 +132,20 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 ```
 
+### UTF-8 Terminal
+
+```bash
+defaults write com.apple.terminal StringEncodings -array 4
+```
+
+### No more 'Are you sure you want to open this application?'
+
+Open an application from the web without being asked if that's what you really want to do. Of course it is.
+
+```bash
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+```
+
 Another update I prefer is to show all filename extensions in Finder. 
 
 [**Finder > Preferences > Advanced > Show all filename extensions**]
@@ -589,3 +603,4 @@ https://www.swyx.io/new-mac-setup-2021/
 - [macOS Monterey: Setting up a Mac for Development](https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/)
 - [How to set Python3 as a default python version on MacOS?](https://dev.to/malwarebo/how-to-set-python3-as-a-default-python-version-on-mac-4jjf)
 - [Macbook Setup Guide For Web Programmers](https://github.com/maoxiaoke/setup-a-mac-for-frontend-dev)
+- [Friendly macOS defaults](https://notrab.dev/posts/friendly-mac-os-defaults/)

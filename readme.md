@@ -254,7 +254,9 @@ I think now is the time to briefly let you know that macOS communicates with rem
 
 First, I recommend you look through [PrivacyGuides.org](https://www.privacyguides.org/). There's a ton of valuable software and links to consume.
 
-One of the more popular network monitors and script blockers is called [Little Snitch](https://www.obdev.at/products/littlesnitch/index.html), which I don't personally use. It will keep applications from reporting back stats that can compromise privacy and security.
+One of the more popular OS network monitors and script blockers is called [Little Snitch](https://www.obdev.at/products/littlesnitch/index.html), which I don't personally use but know it has a great reputation. It will keep applications from reporting back stats that can compromise privacy and security.
+
+Depending on your threat model, one other potential tweak to increase privacy is [blocking all OCSP calls, which stirred moderate controversy in 2020](https://arstechnica.com/gadgets/2020/11/mac-certificate-check-stokes-fears-apple-logs-every-app-you-run/).
 
 ## Sublime Text and VSCode
 

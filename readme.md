@@ -34,20 +34,20 @@ Anytime you see this, it is referring to your CLI of choice, whether it's the bu
 ## System update and Disk Encryption
 
 Step One - Update the system!
-**Apple Icon > System Preferences > Software Updates**
+**Apple Icon > System Settings > General > Software Updates**
 
 Step Two - Turn on FileValut
-**Apple Icon > System Preferences > Security & Privacy > FileVault**
+**Apple Icon > System Settings > Security & Privacy > FileVault**
 
 On a brand new machine or macOS installation, it shouldn't take long depending on the size of your drive.
 
 Alternatively, you can use a third-party encryption software like [Veracrypt](https://en.wikipedia.org/wiki/VeraCrypt/), which is open-source and well regarded in the security community.
 
-### Why Enable FileVault Encryption
+### Why Enable Encryption
 
 Why do you want [full-disk encryption](https://en.wikipedia.org/wiki/Disk_encryption)? Theft.
 
-You're most likely using a portable device of some kind. If you lose it, the laptop gets stolen or someone tries to hack into it, your personal data is at risk. Using full-disk encryption is an extra layer of security to keep your mind at ease in case of potential intrusion.
+You're most likely using a portable device of some kind. If you lose it, the device gets stolen or someone tries to hack into it, your personal data is at risk. Using full-disk encryption is an extra layer of security to keep your mind at ease in case of potential intrusion.
 
 Two main caveats:
 - **Do not misplace or forget your FileVault recovery key or login password**. Losing this password means you cannot log in and without the recovery key everything on your computer is inaccessible if you can't decrypt the files during a recovery. iCloud is one option to store the Filevault password. The other option is downloading it and storing it yourself. Using iCloud, Apple Support will be able to assist you with recovering data. On Apple's servers, iCloud isn't fully encrypted. So, while iCloud is convenient, it's less secure.
@@ -57,7 +57,7 @@ Two main caveats:
 
 This is for online protection when you're not in your home network or not behind a router.
 
-**Apple Icon > System Preferences > Security & Privacy > Firewall**
+**Apple Icon > System Settings > Network > Firewall**
 
 or 
 
@@ -74,26 +74,26 @@ Apple's default system settings are limiting and don't show a lot of information
 
 ### Tap-to-click for the trackpad
 
-1. [**System Preference -> Trackpad -> Point & Click**]
+1. [**System Settings -> Trackpad -> Point & Click**]
 2. [**Tap to click**] option
+
+### Exposé with Trackpad
+
+1. [**System Settings -> Trackpad**]
+2. Click the [**More Gestures**]
+3. Enable "App Exposé" and Mission Control > [**Swipe up with four fingers**]
 
 ### Three-finger Dragging
 
-1. [**System Preference -> Accessibility**]
+1. [**System Settings -> Accessibility**]
 2. In the [**Accessibility**] sidebar, choose [**Pointer Control**]
 3. Click the button [**Trackpad Options**]
-4. Enable dragging with [**three-finger drag**]
-
-### Expose with Trackpad
-
-1. [**System Preference -> Trackpad**]
-2. Click the [**More Gestures**]
-3. Enable "App Exposé" and select [**Swipe up with four fingers**]
+4. Enable dragging style with [**three-finger drag**]
 
 ### Set fast keyboard key repeat rate
 
-1. [**System Preference -> Keyboard**]
-2. Move dial to the right of [**Key Repeat**]
+1. [**System Settings -> Keyboard**]
+2. Move dial to the right in [**Key repeat rate**] and [**Delay until repeat**]
 
 OR
 
@@ -148,7 +148,7 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 Another update I prefer is to show all filename extensions in Finder. 
 
-[**Finder > Preferences > Advanced > Show all filename extensions**]
+[**Finder > Settings > Advanced > Show all filename extensions**]
 
 ### (Optional) Unhide the Library folder
 
@@ -220,13 +220,11 @@ brew list --versions # check installed packages and versions
 
 Here's a list of my favorite apps that I need for development on a regular basis (modify the list below as you need)
 
-    brew install firefox brave-browser tor-browser mullvad-browser slack visual-studio-code vscodium sequel-ace imageoptim vlc vnc-viewer signal virtualbox appcleaner mullvadvpn iterm2 kap libreoffice wireguard-tools zoom qbittorrent scroll-reverser homebrew/cask/docker
+    brew install firefox brave-browser tor-browser mullvad-browser slack visual-studio-code vscodium sequel-ace imageoptim vlc vnc-viewer signal virtualbox appcleaner mullvadvpn kap libreoffice wireguard-tools zoom qbittorrent scroll-reverser homebrew/cask/docker
 
     brew install --cask zed arc transmission
 
-To explicity install software applications with a GUI, it's good to use the flag `--cask`. The example below is necessary because `transmission` can default to a CLI version instead of the GUI-based app.
-
-    brew install transmission --cask
+To explicity install software applications with a GUI (the 2nd command above), use the flag `--cask`. An application like `transmission` can default to a CLI version instead of the GUI-based app.
     
 > [!NOTE]
 > _Don't use `brew` to install *Node.js*, we'll do that below using `nvm`_
@@ -285,14 +283,14 @@ I prefer darker themes: [Material Design Darker](https://github.com/equinusocio/
 
 Go to **Tools > Command Palette** (Shift-Command-P), Highlight **Package Control: Install Package** and then search for your preferred theme, make sure it's highlighted then press Enter to install it.
 
-Then go to **Sublime Text > Preferences > Settings - User** and add the following two lines (using Seti UI) and restart Sublime:
+Then go to **Sublime Text > Settings > Settings - User** and add the following two lines (using Seti UI) and restart Sublime:
 
     "theme": "Seti.sublime-theme",
     "color_scheme": "Packages/Seti_UI/Scheme/Seti.tmTheme",
 
 #### Settings
 
-Let's configure our editor a little. Go to **Sublime Text > Preferences > Settings - User** and paste this code from [my Preferences.sublime-settings file](https://gist.github.com/asuh/67586e056eba7757330f).
+Let's configure our editor a little. Go to **Sublime Text > Settings > Settings - User** and paste this code from [my Preferences.sublime-settings file](https://gist.github.com/asuh/67586e056eba7757330f).
 
 Feel free to tweak these to your preference. When done, save the file and close it.
 
@@ -359,7 +357,7 @@ With that, Vim will look a lot better next time you open it!
 macOS 10.15 and newer come with zsh as the default shell, replacing Bash. Install [Oh My Zsh!](http://ohmyz.sh/) for extra help and nice defaults. 
 
 ```bash
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 Don't forget to customize ZSH!
@@ -555,14 +553,11 @@ To install Composer globally, go to the [Download page](https://getcomposer.org/
 
 ## Virtualbox
 
-There are several ways to setup a local development environment, whether it's [using the built in *AMP stack](http://coolestguidesontheplanet.com/get-apache-mysql-php-phpmyadmin-working-osx-10-9-mavericks/), installing a package like [MAMP](https://www.mamp.info/en/) or [XAMPP](https://www.apachefriends.org) or using virtual machines like [Parallels](https://www.parallels.com/products/desktop/) or [VMWare Fusion](https://www.vmware.com/products/fusion.html) which give you isolated environments.
+There are several ways to setup a local development environment, whether it's using the built in *AMP stack, installing a package like [MAMP](https://www.mamp.info/en/mac/) or [XAMPP](https://www.apachefriends.org) or using virtual machines like [Parallels](https://www.parallels.com/products/desktop/) or [VMWare Fusion](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion) which give you isolated environments.
 
 The free, open-source alternative that I often use is called [Virtualbox](https://www.virtualbox.org/). This gives you a basic but very capable virtual machine host for any operating system that supports virtual installations.
 
     brew install virtualbox
-
-Once installed, you can easily install many [versions of Internet Explorer from the Microsoft's VM site](https://developer.microsoft.com/en-us/microsoft-edge/tools/vms/) if you are still supporting legacy browsers in your project.
-
 
 ## Laravel Valet
 
@@ -570,12 +565,11 @@ In theory, I prefer a completely isolated environment that's self-contained like
 
 Since the late 2010s, I've grown to appreciate a project from Laravel called [Valet](https://laravel.com/docs/master/valet). Valet is free, very lightweight, and is relatively easy to set up. I pair it with [DBngin](https://dbngin.com/), a free and open-source database hosting application.
 
-These two paired together leave a small footprint and don't 
-
+These two paired together leave a small footprint.
 
 ## Docker
 
-I increasingly use Docker for professional projects because of its portability and shared environment for projects with multiple developers.
+I sometimes use Docker for professional projects because of its portability and shared environment for projects with multiple developers.
 
 In order to install the desktop application, we have to use the full homebrew path to Docker desktop.
 
@@ -591,11 +585,6 @@ For privacy, I recommend disabling tracking. Inside of your `.lando.yml` file, a
       - report: false
         url: https://metrics.lando.dev
 
-
-## Video walk-through
-If you like to watch and see by example, some of what I've covered (and more) is in a video that swyx.io-fame Shawn made. I don't agree with or recommend everything he does, but I think much of it is good to see in real time.
-https://www.swyx.io/new-mac-setup-2021/
-
 ## Credits
 
 - [How to Install Xcode, Homebrew, Git, RVM, Ruby & Rails on Mac OS X](http://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/)
@@ -606,3 +595,4 @@ https://www.swyx.io/new-mac-setup-2021/
 - [How to set Python3 as a default python version on MacOS?](https://dev.to/malwarebo/how-to-set-python3-as-a-default-python-version-on-mac-4jjf)
 - [Macbook Setup Guide For Web Programmers](https://github.com/maoxiaoke/setup-a-mac-for-frontend-dev)
 - [Friendly macOS defaults](https://notrab.dev/posts/friendly-mac-os-defaults/)
+- [My 2023 New Mac Setup](https://www.swyx.io/new-mac-setup)

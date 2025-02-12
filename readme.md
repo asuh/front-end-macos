@@ -8,6 +8,7 @@ This document assumes you're running a fresh and updated copy of **macOS "former
 - [Projects Directory](#projects-directory)
 - [Homebrew](#homebrew)
 - [Privacy](#privacy)
+- [AI](#ai)
 - [Sublime Text and VSCode](#sublime-text-and-vscode)
 - [Vim](#vim)
 - [ZSH](#zsh)
@@ -15,7 +16,6 @@ This document assumes you're running a fresh and updated copy of **macOS "former
 - [Git](#git)
 - [Node.js](#nodejs)
 - [Python](#python)
-- [Ansible](#ansible)
 - [Composer](#composer)
 - [VirtualBox](#virtualbox)
 - [Laravel Valet](#laravel-valet)
@@ -220,11 +220,12 @@ brew list --versions # check installed packages and versions
 
 Here's a list of my favorite apps that I need for development on a regular basis (modify the list below as you need)
 
-    brew install firefox brave-browser tor-browser mullvad-browser slack visual-studio-code vscodium sequel-ace imageoptim vlc vnc-viewer signal virtualbox appcleaner mullvadvpn kap libreoffice wireguard-tools zoom qbittorrent scroll-reverser homebrew/cask/docker
+    brew install firefox brave-browser tor-browser mullvad-browser eloston-chromium slack visual-studio-code vscodium sublime-text zed sequel-ace imageoptim vlc vnc-viewer signal virtualbox appcleaner mullvadvpn transmission kap libreoffice wireguard-tools zoom qbittorrent scroll-reverser homebrew/cask/docker 
 
-    brew install --cask zed arc transmission
+> [!NOTE]
+> To explicity install software applications with a GUI, use the flag `--cask`. An application like `transmission` can default to a CLI version instead of the GUI-based app.
 
-To explicity install software applications with a GUI (the 2nd command above), use the flag `--cask`. An application like `transmission` can default to a CLI version instead of the GUI-based app.
+    brew install --cask transmission
     
 > [!NOTE]
 > _Don't use `brew` to install *Node.js*, we'll do that below using `nvm`_
@@ -256,21 +257,66 @@ One of the more popular OS network monitors and script blockers is called [Littl
 
 Depending on your threat model, one other potential tweak to increase privacy is [blocking all OCSP calls, which stirred moderate controversy in 2020](https://arstechnica.com/gadgets/2020/11/mac-certificate-check-stokes-fears-apple-logs-every-app-you-run/).
 
+## AI
+
+As the 2020s move forward, it is clear that AI is neessary for many tasks. Used properly, it can give feedback that could be expected from senior developers and management. It can give immediate feedback and help that can increase productivity.
+
+Using many code editors, you can integrate many different services like [Github CoPilot](https://github.com/features/copilot) using models from [OpenAI](https://openai.com/), [Google](https://gemini.google.com), or [Anthropic](https://www.anthropic.com/).
+
+I can recommend [T3 Chat](https://t3.chat) as the most affordable service to use any of the above AI and more as standalone chat services. You can have extensive conversations and get code samples as feedback from the conversations.
+
 ## Sublime Text and VSCode
 
 The text editor is a developer's most important tool. Everyone has their preferences, but unless you're a hardcore [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) user, I recommend one of two editors: [Sublime Text](https://www.sublimetext.com/) or [VSCode](https://code.visualstudio.com/).
 
+### VSCode
+
+As of 2025, most of my time is spent in a fork of Visual Studio Code. It found popularity at the end of the 2010s and is a staple open-source code editor for most front-end developers. I use it both personally and professionally because of various built-in features like git support, terminal integration, live sharing your code with another developer (using an extension), and a large repository of great extensions. 
+
+    brew install visual-studio-code
+
+Using a terminal, add command line `code` access:
+
+```
+cat << EOF >> ~/.zprofile
+# Add Visual Studio Code (code)
+export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+EOF
+```
+#### VSC Forks
+
+I recommend using [VSCodium](https://vscodium.com/) because it strips away the telemetry and tracking that Microsoft/Github integrates into VSCode. However, [VSCodium has issues with extensions](https://github.com/VSCodium/vscodium/wiki/Extensions-Compatibility) like Live Share, so keep that in mind.
+
+    brew install vscodium
+
+Add command line `codium` access:
+
+    Go to the command palette (View | Command Palette...)
+    Choose Shell command: Install 'codium' command in PATH.
+
+There's a ton of great tutorials and articles, such as [VS Code Docs](https://code.visualstudio.com/docs/introvideos/basics).
+
+Because of the rise of AI since CoPilot and the release of ChatGPT, there are multiple projects that take an approach treating AI as a primary integration. I've tried multiple of these editors and they're interesting and helpful if you are good at your craft and can request the right approaches.
+
+[Chris Coyier wrote about various code editors in 2025](https://frontendmasters.com/blog/notes-on-the-code-editors-with-ai-landscape/).
+
 ### Sublime Text
 
-I split my time starting here, for older projects. It's a solid code editor with lots of extensibility.
+For older projects or quick edits on files, Sublime Text is fast and simple to use. It's a solid code editor with lots of extensibility.
 
     brew install sublime-text-dev
 
-I prefer using the [alpha version of Sublime Text 4](https://sublimetext.com/) which is just as stable as version 2 and 3. I had to join the discord channel to find a link to download version 4.
-
 Sublime Text is not free, but it has an unlimited "evaluation period". The seemingly expensive $70 price tag is worth every penny. If you can afford it, I suggest you [support](https://www.sublimetext.com/buy) this awesome editor. :)
 
+#### Packages
+
+Sublime has a pretty good ecosystem of packages that help enhance Sublime's functionality. A primary reason VSCode is so popular is because it includes so much and has really great extensions.
+
 After installing Sublime Text, add [Package Control](https://packagecontrol.io/installation). This is the most important addition you'll make to Sublime Text and it'll give you the power to install plugins, add-ons, themes, color schemes and more.
+
+One of the more popular type of packages that help enhance Sublime's functionality is [LSP](https://lsp.sublimetext.io/).
+
+Ultimately, make sure any package you install in Sublime is worth the extra functionality. Each package adds more overhead and bloat.
 
 #### Colors
 
@@ -295,34 +341,6 @@ Let's configure our editor a little. Go to **Sublime Text > Settings > Settings 
 Feel free to tweak these to your preference. When done, save the file and close it.
 
 I can also open a file with `$ subl myfile.ext` or start a new project in the current directory with `$ subl .`. Pretty cool!
-
-### VSCode
-
-Here's where I split the rest of my time.
-
-Visual Studio Code found popularity at the end of the 2010s and has become a staple open-source code editor for many front-end developers. I use it both personally and professionally because of various built-in features like git support, terminal integration, live sharing your code with another developer, and a similar-to-Sublime-Text repository of great plugins. 
-
-    brew install visual-studio-code
-
-Add command line `code` access:
-
-```
-cat << EOF >> ~/.zprofile
-# Add Visual Studio Code (code)
-export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-EOF
-```
-
-I recommend using VSCodium, as it strips away the telemetry and tracking that Github integrates into VSCode. However, [VSCodium has issues with extensions](https://github.com/VSCodium/vscodium/wiki/Extensions-Compatibility) like Live Share, so keep that in mind.
-
-    brew install vscodium
-
-Add command line `codium` access:
-
-    Go to the command palette (View | Command Palette...)
-    Choose Shell command: Install 'codium' command in PATH.
-
-There's a ton of great tutorials and articles, such as [VS Code Docs](https://code.visualstudio.com/docs/introvideos/basics) and [VS Code Can Do That?](https://vscodecandothat.com/).
 
 ## Vim
 
@@ -371,7 +389,7 @@ Don't forget to customize ZSH!
 
 SSH is imperative, just like git and node as you'll see.
 
-[Github has excellent instructions for setting up git and connecting it to a Github account](https://help.github.com/en/github/getting-started-with-github/set-up-git). This will help you to install the repos to your computer from Github as well as set up keys that you'll need to connect git and github.
+[Github has excellent instructions for setting up git and connecting it to a Github account](https://docs.github.com/en/get-started/getting-started-with-git/set-up-git). This will help you to install the repos to your computer from Github as well as set up keys that you'll need to connect git and github.
 
 Now you can add a little shortcut to make SSHing into other boxes easier. Paste the following block of code into your SSH config file at `~/.ssh/config`, changing the variables for any hosts that you connect to.
 
@@ -535,13 +553,6 @@ With `python` now running the latest version, it's a good idea to install Pip, w
 
     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     python get-pip.py --user
-
-
-## Ansible
-
-If you're working with virtual machines or remote servers, it's possible you'll need a way to automate/manage tasks on/with them. Ansible is your answer to this.
-
-    python -m pip install --user ansible
 
 ## Composer
 

@@ -461,7 +461,7 @@ With the above aliases, I can run `git s` instead of `git status` or `git ca` in
 For modern Javascript programming, Node.js is required. Using [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm/) to install Node allows you to easily switch between Node versions and is useful for projects on different versions of Node.
 
 ```bash
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 ```
 
 ### nvm usage
@@ -470,17 +470,17 @@ When you enter a project, you can install Node using NVM.
 
     nvm install node
 
-Restart terminal and run the final command.
+Restart terminal and confirm that you are using the default version of Node and npm.
 
-    nvm use node
-    
+    node -v && npm -v
+
+If desired, install a custom version of node
+
+    node install 20
+
 Set a default version of Node.
 
     nvm alias default xx.xx
-
-Confirm that you are using the default version of Node and npm.
-
-    node -v && npm -v
 
 You can switch to another version and use it by changing to the directory where you want to use Node and run the following.
 
